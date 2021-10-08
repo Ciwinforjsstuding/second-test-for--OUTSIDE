@@ -3,9 +3,10 @@ import { IBrand, KeyRootTree } from '../../types/bredns';
 
 import ShortView from '../Cards/ShortView';
 import AllView from '../Cards/AllView';
+import SortBtn from '../SortBtn';
+import EmptyCard from '../Cards/EmptyCard';
 
 import './card-brands.css';
-import SortBtn from '../SortBtn';
 
 interface IRootTree {
   rootTree: IBrand[];
@@ -20,6 +21,7 @@ const CardBrand: FC<IRootTree> = ({
 }) => {
   const [isOpen, setIsOpen] = useState<boolean>(shortView);
   const stateCardText = isOpen ? 'Closed' : 'Opened';
+  const isRootTreeEmpty = Boolean(rootTree.length === 0);
   const toggleHadnler = () => {
     setIsOpen(prev => !prev);
   };
@@ -46,8 +48,9 @@ const CardBrand: FC<IRootTree> = ({
       {isOpen ? (
         <ShortView rootTree={rootTree} titleTree={titleTree} />
       ) : (
-        <AllView rootTree={rootTree} titleTree={titleTree} />
+        <AllView rootTree={rootTree} />
       )}
+      {isRootTreeEmpty && <EmptyCard />}
     </div>
   );
 };

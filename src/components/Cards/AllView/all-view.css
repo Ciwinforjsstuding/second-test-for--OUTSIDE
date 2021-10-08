@@ -1,5 +1,11 @@
 .all-view {
+  /*размер short-view, когда в нём 5 элементов */
   height: 214px;
+  overflow-x: auto;
+  width: 100%;
+}
+
+.all-view-short-root-tree {
   overflow-x: auto;
   width: 100%;
 }

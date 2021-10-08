@@ -1,25 +1,42 @@
-import { IBrand, KeyBrandsForSort } from '../types/bredns';
+import {
+  IBrand,
+  IRootTrees,
+  KeyBrandsForSort,
+} from '../types/bredns';
+
+export const createFirtsLetterInTitle = (brand: IBrand) =>
+  brand.title[0].toLowerCase();
 
 export const sliceBrandsToRootTrie = (
   brands: IBrand[],
-  rootTrees: any
+  rootTrees: IRootTrees
 ) => {
-  // eslint-disable-next-line
   brands.map((brand: IBrand) => {
-    const firstLetterInTitle = brand.title[0].toLowerCase();
-    rootTrees[firstLetterInTitle].push(brand);
+    const firstLetterInTitle = createFirtsLetterInTitle(brand);
+    return rootTrees[firstLetterInTitle].push(brand);
   });
   return rootTrees;
 };
 
-//TODO: убери any и сделай возвращение типа
-export const clearEmptyField = (dirtyRootTrees: any) => {
+export const clearEmptyField = (dirtyRootTrees: IRootTrees) => {
   for (let key in dirtyRootTrees) {
     if (dirtyRootTrees[key].length === 0) {
       delete dirtyRootTrees[key];
     }
   }
   return dirtyRootTrees;
+};
+
+export const deleteFeildRootTree = (
+  _id: string,
+  rootTrees: IRootTrees,
+  titleTree: string
+) => {
+  const resultRootTree = rootTrees[titleTree].filter(
+    brand => brand._id !== _id
+  );
+  const newRootTrees = { ...rootTrees, [titleTree]: resultRootTree };
+  return newRootTrees;
 };
 
 export const sortRootTree = (

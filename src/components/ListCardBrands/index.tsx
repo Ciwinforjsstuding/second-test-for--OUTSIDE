@@ -9,7 +9,6 @@ const ListCardBrands: FC = () => {
   const { rootTrees, loadingRootTree }: IBrandReducer =
     useTypeSelector(state => state.brands);
   const keyTrees = Object.keys(rootTrees);
-
   if (loadingRootTree) {
     return <h1>Wait...</h1>;
   }

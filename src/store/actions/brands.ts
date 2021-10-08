@@ -8,14 +8,16 @@ import {
   KeyRootTree,
 } from '../../types/bredns';
 
-const url =
-  'https://recruting-test-api.herokuapp.com/api/v1/brands';
+const getAllBrands = (): string =>
+  `https://recruting-test-api.herokuapp.com/api/v1/brands`;
 
+const getUrlBrand = (_id: string): string =>
+  `https://recruting-test-api.herokuapp.com/api/v1/brand/${_id}`;
 export const fetchBrandsAction = () => {
   return async (dispatch: Dispatch<BrandsAction>) => {
     try {
       dispatch({ type: BrandsActionType.FETCH_BRANDS });
-      const respons = await axios.get(url);
+      const respons = await axios.get(getAllBrands());
       dispatch({
         type: BrandsActionType.FETCH_BRANDS_SUCCESS,
         payload: respons.data,
@@ -30,6 +32,30 @@ export const fetchBrandsAction = () => {
       dispatch({
         type: BrandsActionType.FETCH_BRANDS_ERROR,
         payload: `Error: ${error}, ошибка при загрузки пользователей`,
+      });
+    }
+  };
+};
+
+export const deletItemCardAction = (
+  _id: string,
+  titleTree: string
+) => {
+  return async (dispatch: Dispatch<BrandsAction>) => {
+    try {
+      dispatch({ type: BrandsActionType.DELETE_ITEM_CARD });
+      await axios.delete(getUrlBrand(_id));
+      dispatch({
+        type: BrandsActionType.DELETE_ITEM_CARD_SUCCESS,
+        payload: {
+          _id,
+          titleTree,
+        },
+      });
+    } catch (error) {
+      dispatch({
+        type: BrandsActionType.DELETE_ITEM_CARD_ERROR,
+        payload: `Error: ${error}, ошибка при удалении item card`,
       });
     }
   };

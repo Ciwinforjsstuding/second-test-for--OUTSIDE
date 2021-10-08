@@ -2,12 +2,15 @@ export enum BrandsActionType {
   FETCH_BRANDS = 'FETCH_BRANDS',
   FETCH_BRANDS_SUCCESS = 'FETCH_BRANDS_SUCCESS',
   FETCH_BRANDS_ERROR = 'FETCH_BRANDS_ERROR',
+  DELETE_ITEM_CARD = 'DELETE_ITEM_CARD',
+  DELETE_ITEM_CARD_ERROR = 'DELETE_ITEM_CARD_ERROR',
+  DELETE_ITEM_CARD_SUCCESS = 'DELETE_ITEM_CARD_SUCCESS',
   CREATE_ROOT_TREES = 'CREATE_ROOT_TREES',
   SORT_ROOT_TREE = 'SORT_ROOT_TREE',
 }
 
 export interface IBrand {
-  readonly id: string | number;
+  readonly _id: string;
   title: string;
   main: boolean;
   _v: number;
@@ -19,8 +22,7 @@ export interface IBrandReducer {
   loading: boolean;
   loadingRootTree: boolean;
   error: null | string;
-  // TODO: измени
-  rootTrees: any;
+  rootTrees: IRootTrees;
 }
 
 //описываем типы для каждого action
@@ -38,28 +40,52 @@ interface IFetchBrandsErrorAction {
   payload: string;
 }
 
-interface ICreateRootTrees {
+interface ICreateRootTreesAction {
   type: BrandsActionType.CREATE_ROOT_TREES;
   payload: IBrand[];
 }
 
-export interface ISortRootTreeAction {
+export interface ISortRootTree {
   keyForSort: KeyBrandsForSort;
   titleTree: KeyRootTree;
   up: boolean;
 }
 
-interface ISortRootTree {
+interface ISortRootTreeAction {
   type: BrandsActionType.SORT_ROOT_TREE;
-  payload: ISortRootTreeAction;
+  payload: ISortRootTree;
+}
+
+interface IDeletItemCardAction {
+  type: BrandsActionType.DELETE_ITEM_CARD;
+}
+
+interface IDeletItemCardSuccessAction {
+  type: BrandsActionType.DELETE_ITEM_CARD_SUCCESS;
+  payload: {
+    _id: string;
+    titleTree: string;
+  };
+}
+
+interface IDeletItemCardErrorAction {
+  type: BrandsActionType.DELETE_ITEM_CARD_ERROR;
+  payload: string;
+}
+
+export interface IRootTrees {
+  [key: string]: IBrand[];
 }
 
 export type BrandsAction =
   | IFetchBrandsAction
   | IFetchBrandsSuccessAction
   | IFetchBrandsErrorAction
-  | ICreateRootTrees
-  | ISortRootTree;
+  | ICreateRootTreesAction
+  | ISortRootTreeAction
+  | IDeletItemCardAction
+  | IDeletItemCardSuccessAction
+  | IDeletItemCardErrorAction;
 
 export enum EnumKeyRootTree {
   title = 'title',

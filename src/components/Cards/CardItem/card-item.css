@@ -18,10 +18,15 @@
 }
 
 .card-item__btn-remove {
+  cursor: pointer;
   border: 1px solid var(--color-border-btn);
   padding: 0.2rem 0.8rem;
   background: var(--white);
   border-radius: 0.5rem;
+}
+
+.card-item__btn-remove:active {
+  background: var(--bg-btn-active);
 }
 .cross {
   width: 14px;

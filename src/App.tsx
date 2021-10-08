@@ -7,13 +7,14 @@ import { IBrandReducer } from './types/bredns';
 
 function App() {
   const { fetchBrandsAction } = useAction();
+  const { error, loading }: IBrandReducer = useTypeSelector(
+    state => state.brands
+  );
   useEffect(() => {
     fetchBrandsAction();
     // eslint-disable-next-line
   }, []);
-  const { error, loading }: IBrandReducer = useTypeSelector(
-    state => state.brands
-  );
+
   if (loading) {
     //TODO: сделай прелоад
     return <h1>Пока идёт загрузка</h1>;

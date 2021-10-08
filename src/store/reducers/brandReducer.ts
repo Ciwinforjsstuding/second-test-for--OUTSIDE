@@ -1,11 +1,13 @@
 import {
   BrandsAction,
   BrandsActionType,
+  IBrand,
   IBrandReducer,
 } from '../../types/bredns';
 import { initiallRootTree } from '../constants';
 import {
   clearEmptyField,
+  deleteFeildRootTree,
   sliceBrandsToRootTrie,
   sortRootTree,
 } from '../util';
@@ -30,9 +32,7 @@ export const brandReducer = (
       brands: [],
     };
   }
-  if (
-    action.type === BrandsActionType.FETCH_BRANDS_SUCCESS
-  ) {
+  if (action.type === BrandsActionType.FETCH_BRANDS_SUCCESS) {
     return {
       ...state,
       loading: false,
@@ -78,6 +78,38 @@ export const brandReducer = (
         ...rootTrees,
         [titleTree]: sortedRootTree,
       },
+    };
+  }
+  if (action.type === BrandsActionType.DELETE_ITEM_CARD) {
+    return {
+      ...state,
+      loading: true,
+      error: null,
+    };
+  }
+  if (action.type === BrandsActionType.DELETE_ITEM_CARD_SUCCESS) {
+    const { _id, titleTree } = action.payload;
+    const deletedCardItem = state.brands.filter(
+      (brand: IBrand) => brand._id !== action.payload._id
+    );
+
+    const newRootTree = deleteFeildRootTree(
+      _id,
+      state.rootTrees,
+      titleTree
+    );
+    return {
+      ...state,
+      loading: false,
+      brands: deletedCardItem,
+      rootTrees: newRootTree,
+    };
+  }
+  if (action.type === BrandsActionType.DELETE_ITEM_CARD_ERROR) {
+    return {
+      ...state,
+      loading: false,
+      error: action.payload,
     };
   }
   return state;
