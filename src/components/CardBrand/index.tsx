@@ -5,6 +5,7 @@ import ShortView from '../Cards/ShortView';
 import AllView from '../Cards/AllView';
 
 import './card-brands.css';
+import SortBtn from '../SortBtn';
 
 interface IRootTree {
   rootTree: IBrand[];
@@ -24,6 +25,9 @@ const CardBrand: FC<IRootTree> = ({
   };
   return (
     <div className="card-brands flex flex-column">
+      <div className="card-brands-srot-section">
+        <SortBtn titleTree={titleTree} />
+      </div>
       <div className="card-brands-title flex items-center justify-between">
         <span className="card-brands-title__text">
           {titleTree} ({rootTree.length})
@@ -40,15 +44,9 @@ const CardBrand: FC<IRootTree> = ({
         </div>
       </div>
       {isOpen ? (
-        <ShortView
-          rootTree={rootTree}
-          titleTree={titleTree}
-        />
+        <ShortView rootTree={rootTree} titleTree={titleTree} />
       ) : (
-        <AllView
-          rootTree={rootTree}
-          titleTree={titleTree}
-        />
+        <AllView rootTree={rootTree} titleTree={titleTree} />
       )}
     </div>
   );
