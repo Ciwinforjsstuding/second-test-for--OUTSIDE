@@ -7,6 +7,7 @@ import SortBtn from '../SortBtn';
 import EmptyCard from '../Cards/EmptyCard';
 
 import './card-brands.css';
+import CreateBrand from '../CreateBrand';
 
 interface IRootTree {
   rootTree: IBrand[];
@@ -51,6 +52,7 @@ const CardBrand: FC<IRootTree> = ({
         <AllView rootTree={rootTree} />
       )}
       {isRootTreeEmpty && <EmptyCard />}
+      <CreateBrand titleTree={titleTree} />
     </div>
   );
 };

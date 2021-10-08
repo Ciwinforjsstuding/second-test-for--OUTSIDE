@@ -9,7 +9,7 @@ import {
 } from '../../types/bredns';
 
 const getAllBrands = (): string =>
-  `https://recruting-test-api.herokuapp.com/api/v1/brands`;
+  'https://recruting-test-api.herokuapp.com/api/v1/brands';
 
 const getUrlBrand = (_id: string): string =>
   `https://recruting-test-api.herokuapp.com/api/v1/brand/${_id}`;
@@ -32,6 +32,29 @@ export const fetchBrandsAction = () => {
       dispatch({
         type: BrandsActionType.FETCH_BRANDS_ERROR,
         payload: `Error: ${error}, ошибка при загрузки пользователей`,
+      });
+    }
+  };
+};
+
+export const createBrand = (title: string, main?: boolean) => {
+  return async (dispatch: Dispatch<BrandsAction>) => {
+    try {
+      dispatch({ type: BrandsActionType.CRETE_BRAND });
+      const respons = await axios.post(getAllBrands(), {
+        _id: '',
+        title,
+        main: true,
+        __v: 0,
+      });
+      dispatch({
+        type: BrandsActionType.CRETE_BRAND_SUCCESS,
+        payload: respons.data,
+      });
+    } catch (error) {
+      dispatch({
+        type: BrandsActionType.CRETE_BRAND_ERROR,
+        payload: `Error: ${error}, ошибка при создании бренда`,
       });
     }
   };

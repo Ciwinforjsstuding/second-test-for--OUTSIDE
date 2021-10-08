@@ -1,0 +1,37 @@
+.create-brand {
+  border: 1px solid rgba(149, 149, 149, 0.226);
+  border-radius: 0.5rem;
+  padding: 5px 10px;
+}
+
+.create-brand__input {
+  color: #00081d;
+  border-radius: 5px;
+  outline: none;
+  padding: 5px 10px;
+  border: 1px solid var(--color-border);
+}
+
+.create-brand__input::placeholder {
+  color: #cacaca;
+}
+
+.create-brand-wrap-checkbox {
+  cursor: pointer;
+}
+
+.create-brand-checkbox__text {
+  margin: 0 5px 0 0;
+}
+
+.create-brand__btn {
+  background: #fff;
+  cursor: pointer;
+  border: 1px solid var(--color-border);
+  padding: 5px 5px;
+  border-radius: 0.5rem;
+}
+
+.create-brand__btn:active {
+  background: var(--bg-btn-active);
+}

@@ -6,6 +6,7 @@ import {
 } from '../../types/bredns';
 import { initiallRootTree } from '../constants';
 import {
+  addBrandToRootTree,
   clearEmptyField,
   deleteFeildRootTree,
   sliceBrandsToRootTrie,
@@ -83,7 +84,6 @@ export const brandReducer = (
   if (action.type === BrandsActionType.DELETE_ITEM_CARD) {
     return {
       ...state,
-      loading: true,
       error: null,
     };
   }
@@ -100,7 +100,6 @@ export const brandReducer = (
     );
     return {
       ...state,
-      loading: false,
       brands: deletedCardItem,
       rootTrees: newRootTree,
     };
@@ -108,7 +107,26 @@ export const brandReducer = (
   if (action.type === BrandsActionType.DELETE_ITEM_CARD_ERROR) {
     return {
       ...state,
-      loading: false,
+      error: action.payload,
+    };
+  }
+  if (action.type === BrandsActionType.CRETE_BRAND) {
+    return {
+      ...state,
+      error: null,
+    };
+  }
+  if (action.type === BrandsActionType.CRETE_BRAND_SUCCESS) {
+    const { payload } = action;
+    const newRootTree = addBrandToRootTree(state.rootTrees, payload);
+    return {
+      ...state,
+      rootTrees: newRootTree,
+    };
+  }
+  if (action.type === BrandsActionType.CRETE_BRAND_ERROR) {
+    return {
+      ...state,
       error: action.payload,
     };
   }

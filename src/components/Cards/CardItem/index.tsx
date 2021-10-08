@@ -11,12 +11,11 @@ interface ICardItem {
   index: number;
   fnDeletItem: (_id: string, titleTree: KeyRootTree | string) => void;
 }
-
 const CardItem: FC<ICardItem> = ({ brand, index, fnDeletItem }) => {
   const titleTree = createFirtsLetterInTitle(brand);
   return (
     <div className="card-item flex items-center justify-between">
-      <div className="card-item-text">
+      <div className="card-item-text flex items-center">
         <span className="card-item-text__number">{index + 1}</span>
         <span className="card-item-text__title">{brand.title}</span>
         <span className="card-item-text__main">

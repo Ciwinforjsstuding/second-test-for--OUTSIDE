@@ -5,6 +5,9 @@ export enum BrandsActionType {
   DELETE_ITEM_CARD = 'DELETE_ITEM_CARD',
   DELETE_ITEM_CARD_ERROR = 'DELETE_ITEM_CARD_ERROR',
   DELETE_ITEM_CARD_SUCCESS = 'DELETE_ITEM_CARD_SUCCESS',
+  CRETE_BRAND = 'CRETE_BRAND',
+  CRETE_BRAND_ERROR = 'CRETE_BRAND_ERROR',
+  CRETE_BRAND_SUCCESS = 'CRETE_BRAND_SUCCESS',
   CREATE_ROOT_TREES = 'CREATE_ROOT_TREES',
   SORT_ROOT_TREE = 'SORT_ROOT_TREE',
 }
@@ -13,7 +16,14 @@ export interface IBrand {
   readonly _id: string;
   title: string;
   main: boolean;
-  _v: number;
+  __v: number;
+}
+//прищлось делать дубликать интерфейса, потому что ts счиатет что с бэка могу не прийти __v и _id
+export interface IBrandFromBackend {
+  readonly _id?: string;
+  title: string;
+  main: boolean;
+  __v?: number;
 }
 
 //типизация нашего reducera
@@ -73,6 +83,20 @@ interface IDeletItemCardErrorAction {
   payload: string;
 }
 
+interface ICreateBrandAction {
+  type: BrandsActionType.CRETE_BRAND;
+}
+
+interface ICreateBrandErrorAction {
+  type: BrandsActionType.CRETE_BRAND_ERROR;
+  payload: string;
+}
+
+interface ICreateBrandSuccessAction {
+  type: BrandsActionType.CRETE_BRAND_SUCCESS;
+  payload: IBrand;
+}
+
 export interface IRootTrees {
   [key: string]: IBrand[];
 }
@@ -85,7 +109,10 @@ export type BrandsAction =
   | ISortRootTreeAction
   | IDeletItemCardAction
   | IDeletItemCardSuccessAction
-  | IDeletItemCardErrorAction;
+  | IDeletItemCardErrorAction
+  | ICreateBrandAction
+  | ICreateBrandErrorAction
+  | ICreateBrandSuccessAction;
 
 export enum EnumKeyRootTree {
   title = 'title',

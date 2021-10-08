@@ -4,13 +4,13 @@ import {
   KeyBrandsForSort,
 } from '../types/bredns';
 
-export const createFirtsLetterInTitle = (brand: IBrand) =>
+export const createFirtsLetterInTitle = (brand: IBrand): string =>
   brand.title[0].toLowerCase();
 
 export const sliceBrandsToRootTrie = (
   brands: IBrand[],
   rootTrees: IRootTrees
-) => {
+): IRootTrees => {
   brands.map((brand: IBrand) => {
     const firstLetterInTitle = createFirtsLetterInTitle(brand);
     return rootTrees[firstLetterInTitle].push(brand);
@@ -18,7 +18,9 @@ export const sliceBrandsToRootTrie = (
   return rootTrees;
 };
 
-export const clearEmptyField = (dirtyRootTrees: IRootTrees) => {
+export const clearEmptyField = (
+  dirtyRootTrees: IRootTrees
+): IRootTrees => {
   for (let key in dirtyRootTrees) {
     if (dirtyRootTrees[key].length === 0) {
       delete dirtyRootTrees[key];
@@ -31,7 +33,7 @@ export const deleteFeildRootTree = (
   _id: string,
   rootTrees: IRootTrees,
   titleTree: string
-) => {
+): IRootTrees => {
   const resultRootTree = rootTrees[titleTree].filter(
     brand => brand._id !== _id
   );
@@ -39,12 +41,23 @@ export const deleteFeildRootTree = (
   return newRootTrees;
 };
 
+export const addBrandToRootTree = (
+  rootTrees: IRootTrees,
+  newBrand: IBrand
+): IRootTrees => {
+  const copyRootTrees = { ...rootTrees };
+  const firstLetterInTitle = createFirtsLetterInTitle(newBrand);
+
+  copyRootTrees[firstLetterInTitle].push(newBrand);
+  return rootTrees;
+};
+
 export const sortRootTree = (
-  rootTrees: IBrand[],
+  rootTree: IBrand[],
   up: boolean,
   keyForSort: KeyBrandsForSort
 ): IBrand[] => {
-  const copyRootTree = [...rootTrees];
+  const copyRootTree = [...rootTree];
   //сортировка по возрастанию
   if (up) {
     copyRootTree.sort((item1, item2) =>
