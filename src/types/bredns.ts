@@ -19,6 +19,7 @@ export interface IBrandReducer {
   loading: boolean;
   loadingRootTree: boolean;
   error: null | string;
+  // TODO: измени
   rootTrees: any;
 }
 
