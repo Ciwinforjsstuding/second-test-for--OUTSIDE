@@ -1,0 +1,28 @@
+.card-item {
+  height: 32px;
+  width: 90%;
+  padding: 5px;
+  border-bottom: 1px solid var(--color-border-card-item);
+}
+
+.card-item:last-child {
+  border-bottom: 0px;
+}
+
+.card-item-text__number {
+  margin: 0 5px 0 0;
+}
+
+.card-item-text__title {
+  margin: 0 10px 0 0;
+}
+
+.card-item__btn-remove {
+  border: 1px solid var(--color-border-btn);
+  padding: 0.2rem 0.8rem;
+  background: var(--white);
+  border-radius: 0.5rem;
+}
+.cross {
+  width: 14px;
+}

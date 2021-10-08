@@ -1,0 +1,12 @@
+:root {
+  /* цвета */
+  --white: #fff;
+  --black: #000;
+  --bg-card-brands: rgba(91, 148, 255, 0.274);
+  --bg-state-btn: rgba(61, 145, 255, 0.08);
+  --bg-state-btn-hover: rgba(61, 145, 255, 0.171);
+  --color-border-btn: rgba(126, 126, 126, 0.212);
+  --color-border-card-item: rgba(144, 144, 144, 0.383);
+  --color-border-brands-title: rgba(0, 0, 0, 0.137);
+  --color-border-list-card-brands: rgba(92, 92, 92, 0.11);
+}

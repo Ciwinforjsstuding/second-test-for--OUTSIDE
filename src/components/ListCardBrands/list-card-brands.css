@@ -1,0 +1,6 @@
+.list-card-brands {
+  width: 80%;
+  padding: 20px 5px;
+  border: 1px solid var(--color-border-list-card-brands);
+  border-radius: 0.5rem;
+}
