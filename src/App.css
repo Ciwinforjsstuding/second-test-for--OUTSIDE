@@ -1,6 +1,9 @@
 .app {
   width: 100%;
 }
+.app-header {
+  width: 100%;
+}
 
 .container {
   margin: 20px auto;

@@ -13,6 +13,6 @@
   --color-border-list-card-brands: rgba(92, 92, 92, 0.11);
   --color-text-empty-card: rgba(12, 40, 51, 0.37);
   --color-error-text: #fa6868;
-  --bg-btn-save-active: rgba(3, 51, 105, 0.644);
-  --bg-btn-save: rgba(3, 51, 105, 0.83);
+  --bg-btn-alt-active: rgba(3, 51, 105, 0.644);
+  --bg-btn-alt: rgba(3, 51, 105, 0.83);
 }

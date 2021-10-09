@@ -1,4 +1,5 @@
 import { IBrand, IRootTrees, KeyBrandsForSort } from '../types/brand';
+import { initiallSearchResult } from './constants';
 
 export const createFirtsLetterInTitle = (brand: IBrand): string =>
   brand.title[0].toLowerCase();
@@ -7,6 +8,9 @@ export const sliceBrandsToRootTrie = (
   brands: IBrand[],
   rootTrees: IRootTrees
 ): IRootTrees => {
+  if (brands.length === 0) {
+    return JSON.parse(JSON.stringify(initiallSearchResult));
+  }
   brands.map((brand: IBrand) => {
     const firstLetterInTitle = createFirtsLetterInTitle(brand);
     return rootTrees[firstLetterInTitle].push(brand);
@@ -87,3 +91,34 @@ export const isValueInputValidForTitleTree = (
   value: string,
   titleTree: string
 ): boolean => value[0].toLocaleLowerCase() !== titleTree;
+
+export const searchBrand = (
+  searchString: string,
+  brans: IBrand[],
+  searchResult: IRootTrees
+) => {
+  const filteredArr = brans.filter(brand =>
+    brand.title.indexOf(searchString) > -1 ? true : false
+  );
+  console.log('filteredArr', filteredArr);
+  const dirtyFilteredRootTree = sliceBrandsToRootTrie(
+    filteredArr,
+    searchResult
+  );
+  console.log('dirtyFilteredRootTree', dirtyFilteredRootTree);
+  const vari = clearEmptyField(dirtyFilteredRootTree);
+  console.log('clearTree', vari);
+  return vari;
+  // let copyRootTrees = { ...rootTrees };
+  // const keys = Object.keys(copyRootTrees);
+  // keys.forEach(key => {
+  //   const filteredRootTree = copyRootTrees[key].filter(brand =>
+  //    brand.title.indexOf(searchString) > -1 ? true : false
+  //   );
+  //   copyRootTrees = { ...copyRootTrees, [key]: filteredRootTree };
+  // });
+  // return clearEmptyField(copyRootTrees);
+};
+
+export const isObjectEmpty = (object: object): Boolean =>
+  Object.keys(object).length === 0 ? true : false;

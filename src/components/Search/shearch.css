@@ -1,0 +1,25 @@
+.search {
+  width: 90%;
+  margin: 20px 20px;
+}
+
+.search__input {
+  outline: none;
+  width: 90%;
+  padding: 20px 25px;
+  border-radius: 0.5rem;
+  border: 1px solid var(--color-border);
+  font-size: 1.2rem;
+}
+
+.seatch__btn {
+  cursor: pointer;
+  background: var(--bg-btn-alt);
+  border: 0px;
+  padding: 10px 15px;
+  border-radius: 0.5rem;
+}
+
+.seatch__btn:active {
+  background: var(--bg-btn-alt-active);
+}

@@ -4,11 +4,13 @@ import {
   IBrand,
   IBrandReducer,
 } from '../../types/brand';
-import { initiallRootTree } from '../constants';
+import { initiallRootTree, initiallSearchResult } from '../constants';
 import {
   addBrandToRootTree,
   clearEmptyField,
   deleteFeildRootTree,
+  isObjectEmpty,
+  searchBrand,
   sliceBrandsToRootTrie,
   sortRootTree,
   updateBrandToRootTree,
@@ -20,6 +22,8 @@ const initiallState = {
   loadingRootTree: true,
   error: null,
   rootTrees: initiallRootTree,
+  searchResult: JSON.parse(JSON.stringify(initiallSearchResult)),
+  isFoundSomething: null,
 };
 
 export const brandReducer = (
@@ -145,6 +149,24 @@ export const brandReducer = (
         updatedBrand,
         titleTree
       ),
+    };
+  }
+  if (action.type === BrandsActionType.SEATCH_BRAND) {
+    const resultSearch = searchBrand(
+      action.payload,
+      state.brands,
+      state.searchResult
+    );
+    if (isObjectEmpty(resultSearch)) {
+      return {
+        ...state,
+        isFoundSomething: false,
+      };
+    }
+    return {
+      ...state,
+      searchResult: resultSearch,
+      isFoundSomething: true,
     };
   }
   return state;

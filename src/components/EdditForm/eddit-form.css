@@ -54,7 +54,7 @@
 .card-eddit-body__btn {
   cursor: pointer;
   width: 25%;
-  background: var(--bg-btn-save);
+  background: var(--bg-btn-alt);
   color: var(--white);
   border-radius: 0.5rem;
   border: 0px;
@@ -63,7 +63,7 @@
 }
 
 .card-eddit-body__btn:active {
-  background: var(--bg-btn-save-active);
+  background: var(--bg-btn-alt-active);
 }
 
 .card-eddit-body__btn_icon {
