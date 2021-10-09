@@ -16,9 +16,11 @@
 }
 
 .card-eddit-body__input {
-  padding: 5px 10px;
+  outline: none;
   width: 55%;
   border-radius: 0.5rem;
+  padding: 5px 10px;
+  border: 1px solid var(--color-border);
 }
 
 .bold {
@@ -37,8 +39,8 @@
   background: var(--bg-btn-active);
 }
 
-.card-eddit-body__input {
-  border: 1px solid var(--color-border);
+.cross-eddit-form {
+  width: 12px;
 }
 
 .card-eddit-body__btn {
@@ -54,10 +56,6 @@
 
 .card-eddit-body__btn:active {
   background: var(--bg-btn-save-active);
-}
-
-.cross-eddit-form {
-  width: 12px;
 }
 
 .card-eddit-body__btn_icon {

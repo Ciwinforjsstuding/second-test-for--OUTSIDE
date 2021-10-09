@@ -6,7 +6,9 @@ import { IBrand, KeyRootTree } from '../../types/brand';
 import './eddit-form.css';
 
 import cross from '../../icons/cross.svg';
-import save from '../../icons/save.svg';
+import SaveBtn from './SaveBtn';
+import DeletBtn from './DeletBtn';
+
 interface IEdditForm {
   brand: IBrand;
   titleTree: KeyRootTree | string;
@@ -18,11 +20,18 @@ const EdditForm: FC<IEdditForm> = ({ brand, titleTree, fnClose }) => {
   const inputhandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValueInput(e.target.value);
   };
-  const { updateBrand } = useAction();
-  const clickhandler = (e: React.MouseEvent) => {
+  const { updateBrand, deletItemCardAction } = useAction();
+  const clickHandlerUpdate = (e: React.MouseEvent) => {
     e.preventDefault();
-    // if ()
+    // if () TODO: сделай валидацию
     updateBrand(brand._id, valueInput, titleTree);
+    fnClose();
+  };
+  const clickHadndlerDelet = (e: React.MouseEvent) => {
+    e.preventDefault();
+    //if () TODO: сделай валидацию
+    deletItemCardAction(brand._id, titleTree);
+    fnClose();
   };
   return (
     <PopUp
@@ -59,16 +68,11 @@ const EdditForm: FC<IEdditForm> = ({ brand, titleTree, fnClose }) => {
               onChange={inputhandler}
             />
           </label>
-          <button
-            onClick={clickhandler}
-            className="card-eddit-body__btn flex justify-around items-center">
-            Сохранить
-            <img
-              className="card-eddit-body__btn_icon"
-              src={save}
-              alt="сохранить изменения"
-            />
-          </button>
+          {valueInput === '' ? (
+            <DeletBtn clickHandler={clickHadndlerDelet} />
+          ) : (
+            <SaveBtn clickHandler={clickHandlerUpdate} />
+          )}
         </div>
       </form>
     </PopUp>
