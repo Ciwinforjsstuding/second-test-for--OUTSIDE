@@ -1,6 +1,12 @@
 import { IBrand, IRootTrees, KeyBrandsForSort } from '../types/brand';
 import { initiallSearchResult } from './constants';
 
+export const getAllBrands = (): string =>
+  'https://recruting-test-api.herokuapp.com/api/v1/brands';
+
+export const getUrlBrand = (_id: string): string =>
+  `https://recruting-test-api.herokuapp.com/api/v1/brand/${_id}`;
+
 export const createFirtsLetterInTitle = (brand: IBrand): string =>
   brand.title[0].toLowerCase();
 
@@ -38,10 +44,13 @@ export const deleteFeildRootTree = (
   rootTrees: IRootTrees,
   titleTree: string
 ): IRootTrees => {
-  const resultRootTree = rootTrees[titleTree].filter(
+  const filtereDRootTree = rootTrees[titleTree].filter(
     brand => brand._id !== _id
   );
-  const newRootTrees = { ...rootTrees, [titleTree]: resultRootTree };
+  const newRootTrees = {
+    ...rootTrees,
+    [titleTree]: filtereDRootTree,
+  };
   return newRootTrees;
 };
 
@@ -49,7 +58,7 @@ export const addBrandToRootTree = (
   rootTrees: IRootTrees,
   newBrand: IBrand
 ): IRootTrees => {
-  const copyRootTrees = { ...rootTrees };
+  const copyRootTrees = unlinkObject(rootTrees);
   const firstLetterInTitle = createFirtsLetterInTitle(newBrand);
   copyRootTrees[firstLetterInTitle].push(newBrand);
   return copyRootTrees;
@@ -60,10 +69,13 @@ export const updateBrandToRootTree = (
   updatedBrand: IBrand,
   titleTree: string
 ): IRootTrees => {
-  const newRootTree = rootTrees[titleTree].map(brand =>
+  const newRootTreeWithUpdateBrand = rootTrees[titleTree].map(brand =>
     brand._id === updatedBrand._id ? updatedBrand : brand
   );
-  const newRootTrees = { ...rootTrees, [titleTree]: newRootTree };
+  const newRootTrees = {
+    ...rootTrees,
+    [titleTree]: newRootTreeWithUpdateBrand,
+  };
   return newRootTrees;
 };
 
@@ -99,7 +111,7 @@ export const isValueInputValidForTitleTree = (
 export const searchBrand = (
   searchString: string,
   brans: IBrand[]
-) => {
+): IRootTrees => {
   const filteredArr = brans.filter(brand =>
     brand.title.indexOf(searchString) > -1 ? true : false
   );
@@ -116,7 +128,7 @@ export const searchBrand = (
 
 export const isSearchRootTreeEquelInitiallSearch = (
   searchResult: IRootTrees
-) => {
+): boolean => {
   const keysSearchResult = Object.keys(searchResult);
   const keysInitialSearchResult = Object.keys(initiallSearchResult);
   if (keysSearchResult.length !== keysInitialSearchResult.length) {

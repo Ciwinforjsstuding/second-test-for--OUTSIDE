@@ -7,12 +7,8 @@ import {
   KeyBrandsForSort,
   KeyRootTree,
 } from '../../types/brand';
+import { getAllBrands, getUrlBrand } from '../util';
 
-const getAllBrands = (): string =>
-  'https://recruting-test-api.herokuapp.com/api/v1/brands';
-
-const getUrlBrand = (_id: string): string =>
-  `https://recruting-test-api.herokuapp.com/api/v1/brand/${_id}`;
 export const fetchBrandsAction = () => {
   return async (dispatch: Dispatch<BrandsAction>) => {
     try {

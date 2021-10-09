@@ -8,6 +8,7 @@ const EmptyResultSearch: FC = () => {
   const { showEmptyResultAction } = useAction();
   useEffect(() => {
     showEmptyResultAction();
+    // eslint-disable-next-line
   }, []);
   return (
     <PopUp

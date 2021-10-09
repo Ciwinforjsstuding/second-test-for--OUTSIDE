@@ -21,7 +21,7 @@ const CardBrand: FC<IRootTree> = ({
   shortView = true,
 }) => {
   const [isOpen, setIsOpen] = useState<boolean>(shortView);
-  const stateCardText = isOpen ? 'Closed' : 'Opened';
+  const stateCardText = isOpen ? 'Закрыто' : 'Открыто';
   const isRootTreeEmpty = Boolean(rootTree.length === 0);
   const toggleHadnler = () => {
     setIsOpen(prev => !prev);
@@ -42,7 +42,7 @@ const CardBrand: FC<IRootTree> = ({
           <button
             onClick={toggleHadnler}
             className="card-brands-state__btn">
-            Toggle
+            Переключить
           </button>
         </div>
       </div>

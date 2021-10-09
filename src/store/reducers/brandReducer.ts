@@ -79,20 +79,26 @@ export const brandReducer = (
       up,
       keyForSort
     );
-    const sortedSearchResult = sortRootTree(
-      searchResult[titleTree],
-      up,
-      keyForSort
-    );
+    if (!isSearchRootTreeEquelInitiallSearch(searchResult)) {
+      const sortedSearchResult = sortRootTree(
+        searchResult[titleTree],
+        up,
+        keyForSort
+      );
+      return {
+        ...state,
+        searchResult: {
+          ...searchResult,
+          [titleTree]: sortedSearchResult,
+        },
+      };
+    }
+
     return {
       ...state,
       rootTrees: {
         ...rootTrees,
         [titleTree]: sortedRootTree,
-      },
-      searchResult: {
-        ...searchResult,
-        [titleTree]: sortedSearchResult,
       },
     };
   }

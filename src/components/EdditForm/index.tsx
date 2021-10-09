@@ -8,7 +8,10 @@ import './eddit-form.css';
 import cross from '../../icons/cross.svg';
 import SaveBtn from './SaveBtn';
 import DeletBtn from './DeletBtn';
-import { isValueInputValidForTitleTree } from '../../store/util';
+import {
+  isValueInputEmpty,
+  isValueInputValidForTitleTree,
+} from '../../store/util';
 
 interface IEdditForm {
   brand: IBrand;
@@ -74,7 +77,7 @@ const EdditForm: FC<IEdditForm> = ({ brand, titleTree, fnClose }) => {
               onChange={inputhandler}
             />
           </label>
-          {valueInput === '' ? (
+          {isValueInputEmpty(valueInput) ? (
             <DeletBtn clickHandler={clickHadndlerDelet} />
           ) : (
             <SaveBtn clickHandler={clickHandlerUpdate} />

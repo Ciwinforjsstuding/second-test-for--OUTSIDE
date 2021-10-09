@@ -11,7 +11,7 @@ import './creaete-brand.css';
 interface ICreateBrand {
   titleTree: KeyRootTree | string;
 }
-
+//код в коментариях отвечает за переключение main
 const CreateBrand: FC<ICreateBrand> = ({ titleTree }) => {
   // const [isMain, setIsMain] = useState<boolean>(false);
   const [valueInput, setValueInput] = useState<string>('');
@@ -58,7 +58,7 @@ const CreateBrand: FC<ICreateBrand> = ({ titleTree }) => {
         />
       </label> */}
       <button className="create-brand__btn" onClick={btnHadnler}>
-        Create
+        Создать
       </button>
     </form>
   );
