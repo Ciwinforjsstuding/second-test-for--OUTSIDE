@@ -1,0 +1,71 @@
+.size-eddit-form {
+  width: 30%;
+  height: 20%;
+}
+
+.card-eddit-header {
+  margin: 0 10px 0 0;
+  padding: 10px 15px 15px 15px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.card-eddit-header__brend {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: inline-block;
+  width: 65%;
+  white-space: nowrap;
+}
+
+.card-eddit-body-wrpa-input {
+  padding: 10px 15px 15px 15px;
+  margin: 0 0 15px 0;
+  width: 95%;
+}
+
+.card-eddit-body__input {
+  outline: none;
+  width: 55%;
+  border-radius: 0.5rem;
+  padding: 5px 10px;
+  border: 1px solid var(--color-border);
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.card-eddit-header__btn {
+  cursor: pointer;
+  background: var(--bg-btn);
+  padding: 5px 10px;
+  border: 0px;
+  border-radius: 0.5rem;
+}
+
+.card-eddit-header__btn:active {
+  background: var(--bg-btn-active);
+}
+
+.cross-eddit-form {
+  width: 12px;
+}
+
+.card-eddit-body__btn {
+  cursor: pointer;
+  width: 25%;
+  background: var(--bg-btn-save);
+  color: var(--white);
+  border-radius: 0.5rem;
+  border: 0px;
+  padding: 10px 15px;
+  font-size: 1rem;
+}
+
+.card-eddit-body__btn:active {
+  background: var(--bg-btn-save-active);
+}
+
+.card-eddit-body__btn_icon {
+  width: 15px;
+}

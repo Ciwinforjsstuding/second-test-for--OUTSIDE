@@ -1,13 +1,17 @@
 import {
   BrandsAction,
   BrandsActionType,
+  IBrand,
   IBrandReducer,
-} from '../../types/bredns';
+} from '../../types/brand';
 import { initiallRootTree } from '../constants';
 import {
+  addBrandToRootTree,
   clearEmptyField,
+  deleteFeildRootTree,
   sliceBrandsToRootTrie,
   sortRootTree,
+  updateBrandToRootTree,
 } from '../util';
 
 const initiallState = {
@@ -30,9 +34,7 @@ export const brandReducer = (
       brands: [],
     };
   }
-  if (
-    action.type === BrandsActionType.FETCH_BRANDS_SUCCESS
-  ) {
+  if (action.type === BrandsActionType.FETCH_BRANDS_SUCCESS) {
     return {
       ...state,
       loading: false,
@@ -78,6 +80,71 @@ export const brandReducer = (
         ...rootTrees,
         [titleTree]: sortedRootTree,
       },
+    };
+  }
+  if (action.type === BrandsActionType.DELETE_ITEM_CARD) {
+    return {
+      ...state,
+      error: null,
+    };
+  }
+  if (action.type === BrandsActionType.DELETE_ITEM_CARD_SUCCESS) {
+    const { _id, titleTree } = action.payload;
+    const deletedCardItem = state.brands.filter(
+      (brand: IBrand) => brand._id !== action.payload._id
+    );
+
+    const newRootTree = deleteFeildRootTree(
+      _id,
+      state.rootTrees,
+      titleTree
+    );
+    return {
+      ...state,
+      brands: deletedCardItem,
+      rootTrees: newRootTree,
+    };
+  }
+  if (action.type === BrandsActionType.DELETE_ITEM_CARD_ERROR) {
+    return {
+      ...state,
+      error: action.payload,
+    };
+  }
+  if (action.type === BrandsActionType.CRETE_BRAND) {
+    return {
+      ...state,
+      error: null,
+    };
+  }
+  if (action.type === BrandsActionType.CRETE_BRAND_SUCCESS) {
+    const { payload } = action;
+    return {
+      ...state,
+      rootTrees: addBrandToRootTree(state.rootTrees, payload),
+    };
+  }
+  if (action.type === BrandsActionType.CRETE_BRAND_ERROR) {
+    return {
+      ...state,
+      error: action.payload,
+    };
+  }
+  if (action.type === BrandsActionType.UPDATE_BRAND) {
+    return {
+      ...state,
+      error: null,
+    };
+  }
+  if (action.type === BrandsActionType.UPDATE_BRAND_SUCCESS) {
+    const { updatedBrand, titleTree } = action.payload;
+    return {
+      ...state,
+      rootTrees: updateBrandToRootTree(
+        state.rootTrees,
+        updatedBrand,
+        titleTree
+      ),
     };
   }
   return state;

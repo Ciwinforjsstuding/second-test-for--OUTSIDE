@@ -1,19 +1,22 @@
-import { IBrand, KeyBrandsForSort } from '../types/bredns';
+import { IBrand, IRootTrees, KeyBrandsForSort } from '../types/brand';
+
+export const createFirtsLetterInTitle = (brand: IBrand): string =>
+  brand.title[0].toLowerCase();
 
 export const sliceBrandsToRootTrie = (
   brands: IBrand[],
-  rootTrees: any
-) => {
-  // eslint-disable-next-line
+  rootTrees: IRootTrees
+): IRootTrees => {
   brands.map((brand: IBrand) => {
-    const firstLetterInTitle = brand.title[0].toLowerCase();
-    rootTrees[firstLetterInTitle].push(brand);
+    const firstLetterInTitle = createFirtsLetterInTitle(brand);
+    return rootTrees[firstLetterInTitle].push(brand);
   });
   return rootTrees;
 };
 
-//TODO: убери any и сделай возвращение типа
-export const clearEmptyField = (dirtyRootTrees: any) => {
+export const clearEmptyField = (
+  dirtyRootTrees: IRootTrees
+): IRootTrees => {
   for (let key in dirtyRootTrees) {
     if (dirtyRootTrees[key].length === 0) {
       delete dirtyRootTrees[key];
@@ -22,12 +25,46 @@ export const clearEmptyField = (dirtyRootTrees: any) => {
   return dirtyRootTrees;
 };
 
+export const deleteFeildRootTree = (
+  _id: string,
+  rootTrees: IRootTrees,
+  titleTree: string
+): IRootTrees => {
+  const resultRootTree = rootTrees[titleTree].filter(
+    brand => brand._id !== _id
+  );
+  const newRootTrees = { ...rootTrees, [titleTree]: resultRootTree };
+  return newRootTrees;
+};
+
+export const addBrandToRootTree = (
+  rootTrees: IRootTrees,
+  newBrand: IBrand
+): IRootTrees => {
+  const copyRootTrees = { ...rootTrees };
+  const firstLetterInTitle = createFirtsLetterInTitle(newBrand);
+  copyRootTrees[firstLetterInTitle].push(newBrand);
+  return copyRootTrees;
+};
+
+export const updateBrandToRootTree = (
+  rootTrees: IRootTrees,
+  updatedBrand: IBrand,
+  titleTree: string
+): IRootTrees => {
+  const newRootTree = rootTrees[titleTree].map(brand =>
+    brand._id === updatedBrand._id ? updatedBrand : brand
+  );
+  const newRootTrees = { ...rootTrees, [titleTree]: newRootTree };
+  return newRootTrees;
+};
+
 export const sortRootTree = (
-  rootTrees: IBrand[],
+  rootTree: IBrand[],
   up: boolean,
   keyForSort: KeyBrandsForSort
 ): IBrand[] => {
-  const copyRootTree = [...rootTrees];
+  const copyRootTree = [...rootTree];
   //сортировка по возрастанию
   if (up) {
     copyRootTree.sort((item1, item2) =>
@@ -42,3 +79,11 @@ export const sortRootTree = (
   }
   return copyRootTree;
 };
+
+export const isValueInputEmpty = (value: string): boolean =>
+  value.length === 0;
+
+export const isValueInputValidForTitleTree = (
+  value: string,
+  titleTree: string
+): boolean => value[0].toLocaleLowerCase() !== titleTree;

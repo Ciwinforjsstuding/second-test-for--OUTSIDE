@@ -3,10 +3,16 @@
   --white: #fff;
   --black: #000;
   --bg-card-brands: rgba(91, 148, 255, 0.274);
-  --bg-state-btn: rgba(61, 145, 255, 0.08);
-  --bg-state-btn-hover: rgba(61, 145, 255, 0.171);
-  --color-border-btn: rgba(126, 126, 126, 0.212);
+  --bg-btn: rgba(61, 145, 255, 0.08);
+  --bg-btn-hover: rgba(61, 145, 255, 0.171);
+  --bg-btn-active: rgba(11, 190, 181, 0.109);
+  --bg-error-alert: #05142b78;
+  --color-border: rgba(126, 126, 126, 0.212);
   --color-border-card-item: rgba(144, 144, 144, 0.383);
   --color-border-brands-title: rgba(0, 0, 0, 0.137);
   --color-border-list-card-brands: rgba(92, 92, 92, 0.11);
+  --color-text-empty-card: rgba(12, 40, 51, 0.37);
+  --color-error-text: #fa6868;
+  --bg-btn-save-active: rgba(3, 51, 105, 0.644);
+  --bg-btn-save: rgba(3, 51, 105, 0.83);
 }

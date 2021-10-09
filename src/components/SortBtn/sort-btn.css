@@ -11,6 +11,10 @@
   border-radius: 0.5rem;
 }
 
+.sort-btn:active {
+  background: var(--bg-btn-active);
+}
+
 .sort-btn__img {
   width: 10px;
 }

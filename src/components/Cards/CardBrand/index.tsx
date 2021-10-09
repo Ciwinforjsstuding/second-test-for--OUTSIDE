@@ -1,11 +1,13 @@
 import React, { FC, useState } from 'react';
-import { IBrand, KeyRootTree } from '../../types/bredns';
+import { IBrand, KeyRootTree } from '../../../types/brand';
 
-import ShortView from '../Cards/ShortView';
-import AllView from '../Cards/AllView';
+import ShortView from '../ShortView';
+import AllView from '../AllView';
+import SortBtn from '../../SortBtn';
+import EmptyCard from '../EmptyCard';
 
 import './card-brands.css';
-import SortBtn from '../SortBtn';
+import CreateBrand from '../../CreateBrand';
 
 interface IRootTree {
   rootTree: IBrand[];
@@ -20,6 +22,7 @@ const CardBrand: FC<IRootTree> = ({
 }) => {
   const [isOpen, setIsOpen] = useState<boolean>(shortView);
   const stateCardText = isOpen ? 'Closed' : 'Opened';
+  const isRootTreeEmpty = Boolean(rootTree.length === 0);
   const toggleHadnler = () => {
     setIsOpen(prev => !prev);
   };
@@ -46,8 +49,10 @@ const CardBrand: FC<IRootTree> = ({
       {isOpen ? (
         <ShortView rootTree={rootTree} titleTree={titleTree} />
       ) : (
-        <AllView rootTree={rootTree} titleTree={titleTree} />
+        <AllView rootTree={rootTree} />
       )}
+      {isRootTreeEmpty && <EmptyCard />}
+      <CreateBrand titleTree={titleTree} />
     </div>
   );
 };

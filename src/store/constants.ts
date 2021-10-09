@@ -1,6 +1,6 @@
-// import { IRootTrees } from '../types/brands';
+import { IRootTrees } from '../types/brand';
 
-export const initiallRootTree = {
+export const initiallRootTree: IRootTrees = {
   0: [],
   1: [],
   2: [],

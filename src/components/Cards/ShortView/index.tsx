@@ -4,7 +4,7 @@ import {
   EnumKeyRootTree,
   IBrand,
   KeyRootTree,
-} from '../../../types/bredns';
+} from '../../../types/brand';
 
 import CardItem from '../CardItem';
 
@@ -15,30 +15,17 @@ interface IShortView {
   titleTree: KeyRootTree | string;
 }
 
-const ShortView: FC<IShortView> = ({
-  rootTree,
-  titleTree,
-}) => {
-  const { sortRootTreeAction } = useAction();
+const ShortView: FC<IShortView> = ({ rootTree, titleTree }) => {
+  const { sortRootTreeAction, deletItemCardAction } = useAction();
   useEffect(() => {
     const isRootTreeHaveMainTrue = Boolean(
-      rootTree.filter(
-        (brand: IBrand) => brand.main === true
-      ).length
+      rootTree.filter((brand: IBrand) => brand.main === true).length
     );
     if (isRootTreeHaveMainTrue) {
-      sortRootTreeAction(
-        titleTree,
-        true,
-        EnumKeyRootTree.main
-      );
+      sortRootTreeAction(titleTree, true, EnumKeyRootTree.main);
     }
     if (!isRootTreeHaveMainTrue) {
-      sortRootTreeAction(
-        titleTree,
-        true,
-        EnumKeyRootTree.title
-      );
+      sortRootTreeAction(titleTree, true, EnumKeyRootTree.title);
     }
     // eslint-disable-next-line
   }, []);
@@ -46,7 +33,12 @@ const ShortView: FC<IShortView> = ({
   return (
     <div className="card-short flex flex-column items-center">
       {sliceRootTree.map((brand, i) => (
-        <CardItem key={i} index={i} brand={brand} />
+        <CardItem
+          key={i}
+          index={i}
+          brand={brand}
+          fnDeletItem={deletItemCardAction}
+        />
       ))}
     </div>
   );

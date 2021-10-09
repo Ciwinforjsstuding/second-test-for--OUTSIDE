@@ -1,0 +1,6 @@
+.empty-card__text {
+  color: var(--color-text-empty-card);
+  text-align: center;
+  font-size: 20px;
+  padding: 10px 0;
+}

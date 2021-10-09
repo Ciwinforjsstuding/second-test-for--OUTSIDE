@@ -1,5 +1,5 @@
 import React, { FC, useState } from 'react';
-import { KeyRootTree, EnumKeyRootTree } from '../../types/bredns';
+import { KeyRootTree, EnumKeyRootTree } from '../../types/brand';
 import { useAction } from '../../hooks/useAction';
 
 import arrowUp from '../../icons/arrow-up-solid.svg';
