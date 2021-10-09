@@ -59,14 +59,6 @@ export const updateBrandToRootTree = (
   return newRootTrees;
 };
 
-// function changeElem(arr, changes) {
-//   // const newArr = [...arr]
-//   const newArr = arr.map(elem =>
-//     elem.id === changes.id ? changes : elem
-//   );
-//   return newArr;
-// }
-
 export const sortRootTree = (
   rootTree: IBrand[],
   up: boolean,
@@ -91,7 +83,7 @@ export const sortRootTree = (
 export const isValueInputEmpty = (value: string): boolean =>
   value.length === 0;
 
-export const isValueinputValidForTitleTree = (
+export const isValueInputValidForTitleTree = (
   value: string,
   titleTree: string
-): boolean => value[0].toLocaleLowerCase() === titleTree;
+): boolean => value[0].toLocaleLowerCase() !== titleTree;

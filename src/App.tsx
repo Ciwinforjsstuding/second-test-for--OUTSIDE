@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import './App.css';
+import ErrorAlert from './components/ErrorAlert';
 import ListCardBrands from './components/ListCardBrands';
 import { useAction } from './hooks/useAction';
 import { useTypeSelector } from './hooks/useTypeSelector';
@@ -9,6 +10,9 @@ function App() {
   const { fetchBrandsAction } = useAction();
   const { error, loading }: IBrandReducer = useTypeSelector(
     state => state.brands
+  );
+  const { haveValidError, errorList } = useTypeSelector(
+    state => state.errorValidate
   );
   useEffect(() => {
     fetchBrandsAction();
@@ -27,6 +31,7 @@ function App() {
     <div className="app">
       <div className="container flex flex-column items-center">
         <ListCardBrands />
+        {haveValidError && <ErrorAlert errorList={errorList} />}
       </div>
     </div>
   );

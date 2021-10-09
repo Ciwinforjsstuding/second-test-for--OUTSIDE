@@ -9,6 +9,14 @@
   border-bottom: 1px solid var(--color-border);
 }
 
+.card-eddit-header__brend {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: inline-block;
+  width: 65%;
+  white-space: nowrap;
+}
+
 .card-eddit-body-wrpa-input {
   padding: 10px 15px 15px 15px;
   margin: 0 0 15px 0;

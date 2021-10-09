@@ -25,7 +25,9 @@ const CardItem: FC<ICardItem> = ({ brand, index, fnDeletItem }) => {
       <div className="card-item flex items-center justify-between">
         <div className="card-item-text flex items-center">
           <span className="card-item-text__number">{index + 1}</span>
-          <span className="card-item-text__title">{brand.title}</span>
+          <abbr title={brand.title} className="card-item-text__title">
+            {brand.title}
+          </abbr>
           <button className="card-item-text__eddit-btn flex items-center">
             <img
               onClick={clickHandler}

@@ -2,10 +2,9 @@ import React, { FC, useState } from 'react';
 import { useAction } from '../../hooks/useAction';
 import {
   isValueInputEmpty,
-  isValueinputValidForTitleTree,
+  isValueInputValidForTitleTree,
 } from '../../store/util';
 import { KeyRootTree } from '../../types/brand';
-import ErrorAlert from '../ErrorAlert';
 
 import './creaete-brand.css';
 
@@ -16,47 +15,25 @@ interface ICreateBrand {
 const CreateBrand: FC<ICreateBrand> = ({ titleTree }) => {
   // const [isMain, setIsMain] = useState<boolean>(false);
   const [valueInput, setValueInput] = useState<string>('');
-  const [errorList, setErrorList] = useState<string[]>([]);
-  const [validationError, setValidationError] =
-    useState<boolean>(false);
-  const { createBrand } = useAction();
+  useState<boolean>(false);
+  const { createBrand, sendValidateError } = useAction();
   // const checkBoxhandler = () => {
   //   setIsMain(prev => !prev);
   // };
   const inputHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValueInput(e.target.value);
   };
-  const errorAlerHadnler = () => {
-    setValidationError(prve => !prve);
-    setErrorList([]);
-  };
   const btnHadnler = (e: React.MouseEvent) => {
     e.preventDefault();
     if (isValueInputEmpty(valueInput)) {
-      setErrorList(prev => {
-        prev.push('Input не может быть пустым');
-        return prev;
-      });
-      setValidationError(true);
-      setTimeout(() => {
-        setValidationError(false);
-        setErrorList([]);
-      }, 2000);
+      sendValidateError('Input не может быть пустым');
       return;
     }
 
-    if (!isValueinputValidForTitleTree(valueInput, titleTree)) {
-      setErrorList(prev => {
-        prev.push(
-          'Название бренда должно начинаться с той же буквы что у карточки'
-        );
-        return prev;
-      });
-      setValidationError(true);
-      setTimeout(() => {
-        setValidationError(false);
-        setErrorList([]);
-      }, 2000);
+    if (isValueInputValidForTitleTree(valueInput, titleTree)) {
+      sendValidateError(
+        'Название бренда должно начинаться с той же буквы что у карточки'
+      );
       return;
     }
     createBrand(valueInput);
@@ -83,12 +60,6 @@ const CreateBrand: FC<ICreateBrand> = ({ titleTree }) => {
       <button className="create-brand__btn" onClick={btnHadnler}>
         Create
       </button>
-      {validationError && (
-        <ErrorAlert
-          fnClose={errorAlerHadnler}
-          errorList={errorList}
-        />
-      )}
     </form>
   );
 };

@@ -8,6 +8,7 @@ import './eddit-form.css';
 import cross from '../../icons/cross.svg';
 import SaveBtn from './SaveBtn';
 import DeletBtn from './DeletBtn';
+import { isValueInputValidForTitleTree } from '../../store/util';
 
 interface IEdditForm {
   brand: IBrand;
@@ -17,19 +18,24 @@ interface IEdditForm {
 
 const EdditForm: FC<IEdditForm> = ({ brand, titleTree, fnClose }) => {
   const [valueInput, setValueInput] = useState<string>(brand.title);
+  const { sendValidateError } = useAction();
   const inputhandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValueInput(e.target.value);
   };
   const { updateBrand, deletItemCardAction } = useAction();
   const clickHandlerUpdate = (e: React.MouseEvent) => {
     e.preventDefault();
-    // if () TODO: сделай валидацию
+    if (isValueInputValidForTitleTree(valueInput, titleTree)) {
+      sendValidateError(
+        'Название бренда должно начинаться с той же буквы что у карточки'
+      );
+      return;
+    }
     updateBrand(brand._id, valueInput, titleTree);
     fnClose();
   };
   const clickHadndlerDelet = (e: React.MouseEvent) => {
     e.preventDefault();
-    //if () TODO: сделай валидацию
     deletItemCardAction(brand._id, titleTree);
     fnClose();
   };
@@ -43,7 +49,7 @@ const EdditForm: FC<IEdditForm> = ({ brand, titleTree, fnClose }) => {
             Редактирование бренда:
             <span className="bold">{brand.title}</span>
           </span>
-          <span className="card-eddit-header__tite-tree">
+          <span className="card-eddit-header__title-tree">
             в карточке: <span className="bold">{titleTree}</span>
           </span>
           <button
