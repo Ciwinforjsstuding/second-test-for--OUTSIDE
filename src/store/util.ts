@@ -8,9 +8,6 @@ export const sliceBrandsToRootTrie = (
   brands: IBrand[],
   rootTrees: IRootTrees
 ): IRootTrees => {
-  if (brands.length === 0) {
-    return JSON.parse(JSON.stringify(initiallSearchResult));
-  }
   brands.map((brand: IBrand) => {
     const firstLetterInTitle = createFirtsLetterInTitle(brand);
     return rootTrees[firstLetterInTitle].push(brand);
@@ -100,6 +97,9 @@ export const searchBrand = (
   const filteredArr = brans.filter(brand =>
     brand.title.indexOf(searchString) > -1 ? true : false
   );
+  if (filteredArr.length === 0) {
+    return JSON.parse(JSON.stringify(initiallSearchResult));
+  }
   console.log('filteredArr', filteredArr);
   const dirtyFilteredRootTree = sliceBrandsToRootTrie(
     filteredArr,
@@ -122,3 +122,7 @@ export const searchBrand = (
 
 export const isObjectEmpty = (object: object): Boolean =>
   Object.keys(object).length === 0 ? true : false;
+
+export const isSearchRootTreeEquelInitiallSearch = (
+  searchResult: IRootTrees
+) => {};
