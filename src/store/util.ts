@@ -4,15 +4,22 @@ import { initiallSearchResult } from './constants';
 export const createFirtsLetterInTitle = (brand: IBrand): string =>
   brand.title[0].toLowerCase();
 
+export const unlinkObject = (object: IRootTrees): IRootTrees =>
+  JSON.parse(JSON.stringify(object));
+
 export const sliceBrandsToRootTrie = (
   brands: IBrand[],
   rootTrees: IRootTrees
 ): IRootTrees => {
+  const copyRootTrees = unlinkObject(rootTrees);
   brands.map((brand: IBrand) => {
     const firstLetterInTitle = createFirtsLetterInTitle(brand);
-    return rootTrees[firstLetterInTitle].push(brand);
+    return (copyRootTrees[firstLetterInTitle] = [
+      ...copyRootTrees[firstLetterInTitle],
+      brand,
+    ]);
   });
-  return rootTrees;
+  return copyRootTrees;
 };
 
 export const clearEmptyField = (
@@ -91,38 +98,37 @@ export const isValueInputValidForTitleTree = (
 
 export const searchBrand = (
   searchString: string,
-  brans: IBrand[],
-  searchResult: IRootTrees
+  brans: IBrand[]
 ) => {
   const filteredArr = brans.filter(brand =>
     brand.title.indexOf(searchString) > -1 ? true : false
   );
+  const copyInitiall = unlinkObject(initiallSearchResult);
   if (filteredArr.length === 0) {
-    return JSON.parse(JSON.stringify(initiallSearchResult));
+    return copyInitiall;
   }
-  console.log('filteredArr', filteredArr);
   const dirtyFilteredRootTree = sliceBrandsToRootTrie(
     filteredArr,
-    searchResult
+    copyInitiall
   );
-  console.log('dirtyFilteredRootTree', dirtyFilteredRootTree);
-  const vari = clearEmptyField(dirtyFilteredRootTree);
-  console.log('clearTree', vari);
-  return vari;
-  // let copyRootTrees = { ...rootTrees };
-  // const keys = Object.keys(copyRootTrees);
-  // keys.forEach(key => {
-  //   const filteredRootTree = copyRootTrees[key].filter(brand =>
-  //    brand.title.indexOf(searchString) > -1 ? true : false
-  //   );
-  //   copyRootTrees = { ...copyRootTrees, [key]: filteredRootTree };
-  // });
-  // return clearEmptyField(copyRootTrees);
+  return clearEmptyField(dirtyFilteredRootTree);
 };
-
-export const isObjectEmpty = (object: object): Boolean =>
-  Object.keys(object).length === 0 ? true : false;
 
 export const isSearchRootTreeEquelInitiallSearch = (
   searchResult: IRootTrees
-) => {};
+) => {
+  const keysSearchResult = Object.keys(searchResult);
+  const keysInitialSearchResult = Object.keys(initiallSearchResult);
+  if (keysSearchResult.length !== keysInitialSearchResult.length) {
+    return false;
+  }
+  for (let i = 0; i < keysInitialSearchResult.length; i++) {
+    const key = keysInitialSearchResult[i];
+    if (
+      searchResult[key].length !== initiallSearchResult[key].length
+    ) {
+      return false;
+    }
+  }
+  return true;
+};

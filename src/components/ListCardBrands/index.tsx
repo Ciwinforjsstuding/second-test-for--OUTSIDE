@@ -5,15 +5,18 @@ import CardBrand from '../Cards/CardBrand';
 import './list-card-brands.css';
 
 const ListCardBrands: FC = () => {
-  const { rootTrees } = useTypeSelector(state => state.brands);
-  const keyTrees = Object.keys(rootTrees);
+  const { rootTrees, isFoundSomething, searchResult } =
+    useTypeSelector(state => state.brands);
+  const showDate =
+    isFoundSomething === true ? searchResult : rootTrees;
+  const keyTrees = Object.keys(showDate);
   return (
     <div className="list-card-brands flex justify-around items-start flex-wrap">
       {keyTrees.map((keyTree, i) => (
         <CardBrand
           key={i}
           titleTree={keyTree}
-          rootTree={rootTrees[keyTree]}
+          rootTree={showDate[keyTree]}
         />
       ))}
     </div>

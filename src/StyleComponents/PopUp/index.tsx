@@ -13,8 +13,9 @@ const PopUp: FC<IPopUp> = ({
   customCssOverlay,
 }) => {
   return (
-    <div className={`overlay ${customCssOverlay}`}>
-      <div className={`pop-up flex flex-column ${customCssModal}`}>
+    <div className={`overlay ${customCssOverlay || ''}`}>
+      <div
+        className={`pop-up flex flex-column ${customCssModal || ''}`}>
         {children}
       </div>
     </div>

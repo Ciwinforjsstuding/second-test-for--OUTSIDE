@@ -21,3 +21,7 @@ export const sendValidateError = (titleError: string) => {
     );
   };
 };
+
+export const closeErrorAlertAction = () => ({
+  type: ErrorValidateActionType.RESET_ERROR_VALIDATE,
+});

@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import './App.css';
+import EmptyResultSearch from './components/EmptyResultSearch';
 import ErrorAlert from './components/ErrorAlert';
 import ListCardBrands from './components/ListCardBrands';
 import Search from './components/Search';
@@ -9,12 +10,12 @@ import { IBrandReducer } from './types/brand';
 
 function App() {
   const { fetchBrandsAction } = useAction();
-  const { error, loadingRootTree }: IBrandReducer = useTypeSelector(
-    state => state.brands
-  );
+  const { error, loadingRootTree, isFoundSomething }: IBrandReducer =
+    useTypeSelector(state => state.brands);
   const { haveValidError, errorList } = useTypeSelector(
     state => state.errorValidate
   );
+  const isFoundFalse = isFoundSomething === false;
   useEffect(() => {
     fetchBrandsAction();
     // eslint-disable-next-line
@@ -36,6 +37,7 @@ function App() {
       <div className="container flex flex-column items-center">
         <ListCardBrands />
         {haveValidError && <ErrorAlert errorList={errorList} />}
+        {isFoundFalse && <EmptyResultSearch />}
       </div>
     </div>
   );

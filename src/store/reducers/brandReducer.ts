@@ -9,10 +9,11 @@ import {
   addBrandToRootTree,
   clearEmptyField,
   deleteFeildRootTree,
-  isObjectEmpty,
+  isSearchRootTreeEquelInitiallSearch,
   searchBrand,
   sliceBrandsToRootTrie,
   sortRootTree,
+  unlinkObject,
   updateBrandToRootTree,
 } from '../util';
 
@@ -22,7 +23,7 @@ const initiallState = {
   loadingRootTree: true,
   error: null,
   rootTrees: initiallRootTree,
-  searchResult: JSON.parse(JSON.stringify(initiallSearchResult)),
+  searchResult: unlinkObject(initiallSearchResult),
   isFoundSomething: null,
 };
 
@@ -71,10 +72,15 @@ export const brandReducer = (
     };
   }
   if (action.type === BrandsActionType.SORT_ROOT_TREE) {
-    const { rootTrees } = state;
+    const { rootTrees, searchResult } = state;
     const { titleTree, up, keyForSort } = action.payload;
     const sortedRootTree = sortRootTree(
       rootTrees[titleTree],
+      up,
+      keyForSort
+    );
+    const sortedSearchResult = sortRootTree(
+      searchResult[titleTree],
       up,
       keyForSort
     );
@@ -83,6 +89,10 @@ export const brandReducer = (
       rootTrees: {
         ...rootTrees,
         [titleTree]: sortedRootTree,
+      },
+      searchResult: {
+        ...searchResult,
+        [titleTree]: sortedSearchResult,
       },
     };
   }
@@ -151,15 +161,12 @@ export const brandReducer = (
       ),
     };
   }
-  if (action.type === BrandsActionType.SEATCH_BRAND) {
-    const resultSearch = searchBrand(
-      action.payload,
-      state.brands,
-      state.searchResult
-    );
-    if (isObjectEmpty(resultSearch)) {
+  if (action.type === BrandsActionType.SEARCH_BRAND) {
+    const resultSearch = searchBrand(action.payload, state.brands);
+    if (isSearchRootTreeEquelInitiallSearch(resultSearch)) {
       return {
         ...state,
+        searchResult: resultSearch,
         isFoundSomething: false,
       };
     }
@@ -167,6 +174,19 @@ export const brandReducer = (
       ...state,
       searchResult: resultSearch,
       isFoundSomething: true,
+    };
+  }
+  if (action.type === BrandsActionType.SHOW_EMPTY_RESYLT) {
+    return {
+      ...state,
+      isFoundSomething: null,
+    };
+  }
+  if (action.type === BrandsActionType.RESET_SEARCH) {
+    return {
+      ...state,
+      searchResult: unlinkObject(initiallSearchResult),
+      isFoundSomething: null,
     };
   }
   return state;

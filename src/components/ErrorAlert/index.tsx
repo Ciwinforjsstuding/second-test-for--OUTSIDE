@@ -4,13 +4,14 @@ import './error-alert.css';
 import PopUp from '../../StyleComponents/PopUp';
 
 import cross from '../../icons/cross.svg';
+import { useAction } from '../../hooks/useAction';
 
 interface IErrorAlert {
   errorList: string[];
-  fnClose?: () => void;
 }
 
-const ErrorAlert: FC<IErrorAlert> = ({ errorList, fnClose }) => {
+const ErrorAlert: FC<IErrorAlert> = ({ errorList }) => {
+  const { closeErrorAlertAction } = useAction();
   return (
     <PopUp
       customCssOverlay="flex justify-center items-center"
@@ -19,7 +20,7 @@ const ErrorAlert: FC<IErrorAlert> = ({ errorList, fnClose }) => {
         <div className="error-alert-card-header flex items-center justify-between">
           <h3 className="error-alert-card-header__title">Ошибка!</h3>
           <button
-            onClick={fnClose}
+            onClick={closeErrorAlertAction}
             className="error-alert-card-header__btn">
             <img
               src={cross}
@@ -28,8 +29,10 @@ const ErrorAlert: FC<IErrorAlert> = ({ errorList, fnClose }) => {
             />
           </button>
         </div>
-        {errorList.map(error => (
-          <span className="error-alert-card__text">{error}</span>
+        {errorList.map((error, i) => (
+          <span key={i} className="error-alert-card__text">
+            {error}
+          </span>
         ))}
       </div>
     </PopUp>

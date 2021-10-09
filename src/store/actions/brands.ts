@@ -125,6 +125,22 @@ export const sortRootTreeAction = (
 });
 
 export const searchBrnadByStringAction = (searchStr: string) => ({
-  type: BrandsActionType.SEATCH_BRAND,
+  type: BrandsActionType.SEARCH_BRAND,
   payload: searchStr,
 });
+
+export const resetSearchAction = () => ({
+  type: BrandsActionType.RESET_SEARCH,
+});
+
+export const showEmptyResultAction = () => {
+  return async (dispatch: Dispatch<BrandsAction>) => {
+    setTimeout(
+      () =>
+        dispatch({
+          type: BrandsActionType.SHOW_EMPTY_RESYLT,
+        }),
+      1000
+    );
+  };
+};

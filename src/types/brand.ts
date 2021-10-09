@@ -13,7 +13,9 @@ export enum BrandsActionType {
   UPDATE_BRAND_SUCCESS = 'UPDATE_BRAND_SUCCESS',
   CREATE_ROOT_TREES = 'CREATE_ROOT_TREES',
   SORT_ROOT_TREE = 'SORT_ROOT_TREE',
-  SEATCH_BRAND = 'SEATCH_BRAND',
+  SEARCH_BRAND = 'SEARCH_BRAND',
+  SHOW_EMPTY_RESYLT = 'SHOW_EMPTY_RESYLT',
+  RESET_SEARCH = 'RESET_SEARCH',
 }
 
 export interface IBrand {
@@ -115,14 +117,17 @@ interface IUpdateBrandSuccessAction {
   payload: IUpdateBrand;
 }
 
-export interface ISearchBrandAction {
-  type: BrandsActionType.SEATCH_BRAND;
+interface ISearchBrandAction {
+  type: BrandsActionType.SEARCH_BRAND;
   payload: string;
 }
 
-// export interface IEmptyObject {
-//   [key: string]: IBrand[];
-// }
+interface IShowEmptyResult {
+  type: BrandsActionType.SHOW_EMPTY_RESYLT;
+}
+interface IResetSearch {
+  type: BrandsActionType.RESET_SEARCH;
+}
 
 export interface IRootTrees {
   [key: string]: IBrand[];
@@ -143,7 +148,9 @@ export type BrandsAction =
   | IUpdateBrandAction
   | IUpdateBrandErrorAction
   | IUpdateBrandSuccessAction
-  | ISearchBrandAction;
+  | ISearchBrandAction
+  | IShowEmptyResult
+  | IResetSearch;
 
 export enum EnumKeyRootTree {
   title = 'title',

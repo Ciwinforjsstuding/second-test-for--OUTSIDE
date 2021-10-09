@@ -12,14 +12,30 @@
   font-size: 1.2rem;
 }
 
-.seatch__btn {
+.search__btn_search {
   cursor: pointer;
   background: var(--bg-btn-alt);
   border: 0px;
   padding: 10px 15px;
   border-radius: 0.5rem;
+  color: var(--white);
+  margin: 0 5px;
 }
 
-.seatch__btn:active {
+.search__btn_search:active {
+  background: var(--bg-btn-alt-active);
+}
+
+.search__btn_reset {
+  color: var(--white);
+  cursor: pointer;
+  background: var(--bg-btn-alt);
+  border: 0px;
+  border-radius: 0.5rem;
+  padding: 10px 15px;
+  height: 70%;
+  font-size: 1rem;
+}
+.search__btn_reset:active {
   background: var(--bg-btn-alt-active);
 }
