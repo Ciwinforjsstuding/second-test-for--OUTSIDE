@@ -11,6 +11,7 @@ export const sendValidateError = (titleError: string) => {
       type: ErrorValidateActionType.SET_ERROR_VALIDATE,
       payload: titleError,
     });
+    // что бы наш error alert исчезал через 2s
     setTimeout(
       () =>
         dispatch({
