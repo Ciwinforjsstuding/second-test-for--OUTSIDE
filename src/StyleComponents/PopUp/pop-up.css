@@ -1,0 +1,17 @@
+.overlay {
+  position: absolute;
+  z-index: 2;
+  background: var(--bg-error-alert);
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+}
+
+.pop-up {
+  position: absolute;
+  z-index: 2;
+  background: var(--white);
+  padding: 10px;
+  border-radius: 0.5rem;
+}

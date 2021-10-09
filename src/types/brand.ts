@@ -8,6 +8,9 @@ export enum BrandsActionType {
   CRETE_BRAND = 'CRETE_BRAND',
   CRETE_BRAND_ERROR = 'CRETE_BRAND_ERROR',
   CRETE_BRAND_SUCCESS = 'CRETE_BRAND_SUCCESS',
+  UPDATE_BRAND = 'UPDATE_BRAND',
+  UPDATE_BRAND_ERROR = 'UPDATE_BRAND_ERROR',
+  UPDATE_BRAND_SUCCESS = 'UPDATE_BRAND_SUCCESS',
   CREATE_ROOT_TREES = 'CREATE_ROOT_TREES',
   SORT_ROOT_TREE = 'SORT_ROOT_TREE',
 }
@@ -17,13 +20,6 @@ export interface IBrand {
   title: string;
   main: boolean;
   __v: number;
-}
-//прищлось делать дубликать интерфейса, потому что ts счиатет что с бэка могу не прийти __v и _id
-export interface IBrandFromBackend {
-  readonly _id?: string;
-  title: string;
-  main: boolean;
-  __v?: number;
 }
 
 //типизация нашего reducera
@@ -97,6 +93,25 @@ interface ICreateBrandSuccessAction {
   payload: IBrand;
 }
 
+interface IUpdateBrandAction {
+  type: BrandsActionType.UPDATE_BRAND;
+}
+
+interface IUpdateBrandErrorAction {
+  type: BrandsActionType.UPDATE_BRAND_ERROR;
+  payload: string;
+}
+
+export interface IUpdateBrand {
+  updatedBrand: IBrand;
+  titleTree: string | KeyRootTree;
+}
+
+interface IUpdateBrandSuccessAction {
+  type: BrandsActionType.UPDATE_BRAND_SUCCESS;
+  payload: IUpdateBrand;
+}
+
 export interface IRootTrees {
   [key: string]: IBrand[];
 }
@@ -112,7 +127,10 @@ export type BrandsAction =
   | IDeletItemCardErrorAction
   | ICreateBrandAction
   | ICreateBrandErrorAction
-  | ICreateBrandSuccessAction;
+  | ICreateBrandSuccessAction
+  | IUpdateBrandAction
+  | IUpdateBrandErrorAction
+  | IUpdateBrandSuccessAction;
 
 export enum EnumKeyRootTree {
   title = 'title',

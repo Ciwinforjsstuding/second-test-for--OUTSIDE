@@ -6,7 +6,7 @@ import {
   BrandsActionType,
   KeyBrandsForSort,
   KeyRootTree,
-} from '../../types/bredns';
+} from '../../types/brand';
 
 const getAllBrands = (): string =>
   'https://recruting-test-api.herokuapp.com/api/v1/brands';
@@ -79,6 +79,33 @@ export const deletItemCardAction = (
       dispatch({
         type: BrandsActionType.DELETE_ITEM_CARD_ERROR,
         payload: `Error: ${error}, ошибка при удалении item card`,
+      });
+    }
+  };
+};
+
+export const updateBrand = (
+  _id: string,
+  title: string,
+  titleTree: string
+) => {
+  return async (dispatch: Dispatch<BrandsAction>) => {
+    try {
+      dispatch({ type: BrandsActionType.UPDATE_BRAND });
+      const respons = await axios.put(getUrlBrand(_id), {
+        _id: '',
+        title,
+        main: true,
+        __v: 0,
+      });
+      dispatch({
+        type: BrandsActionType.UPDATE_BRAND_SUCCESS,
+        payload: { updatedBrand: respons.data, titleTree },
+      });
+    } catch (error) {
+      dispatch({
+        type: BrandsActionType.UPDATE_BRAND_ERROR,
+        payload: `Error: ${error}, ошибка при обновлении бренда`,
       });
     }
   };

@@ -3,7 +3,7 @@ import {
   BrandsActionType,
   IBrand,
   IBrandReducer,
-} from '../../types/bredns';
+} from '../../types/brand';
 import { initiallRootTree } from '../constants';
 import {
   addBrandToRootTree,
@@ -11,6 +11,7 @@ import {
   deleteFeildRootTree,
   sliceBrandsToRootTrie,
   sortRootTree,
+  updateBrandToRootTree,
 } from '../util';
 
 const initiallState = {
@@ -118,16 +119,32 @@ export const brandReducer = (
   }
   if (action.type === BrandsActionType.CRETE_BRAND_SUCCESS) {
     const { payload } = action;
-    const newRootTree = addBrandToRootTree(state.rootTrees, payload);
     return {
       ...state,
-      rootTrees: newRootTree,
+      rootTrees: addBrandToRootTree(state.rootTrees, payload),
     };
   }
   if (action.type === BrandsActionType.CRETE_BRAND_ERROR) {
     return {
       ...state,
       error: action.payload,
+    };
+  }
+  if (action.type === BrandsActionType.UPDATE_BRAND) {
+    return {
+      ...state,
+      error: null,
+    };
+  }
+  if (action.type === BrandsActionType.UPDATE_BRAND_SUCCESS) {
+    const { updatedBrand, titleTree } = action.payload;
+    return {
+      ...state,
+      rootTrees: updateBrandToRootTree(
+        state.rootTrees,
+        updatedBrand,
+        titleTree
+      ),
     };
   }
   return state;

@@ -1,13 +1,13 @@
 import React, { FC, useState } from 'react';
-import { IBrand, KeyRootTree } from '../../types/bredns';
+import { IBrand, KeyRootTree } from '../../../types/brand';
 
-import ShortView from '../Cards/ShortView';
-import AllView from '../Cards/AllView';
-import SortBtn from '../SortBtn';
-import EmptyCard from '../Cards/EmptyCard';
+import ShortView from '../ShortView';
+import AllView from '../AllView';
+import SortBtn from '../../SortBtn';
+import EmptyCard from '../EmptyCard';
 
 import './card-brands.css';
-import CreateBrand from '../CreateBrand';
+import CreateBrand from '../../CreateBrand';
 
 interface IRootTree {
   rootTree: IBrand[];

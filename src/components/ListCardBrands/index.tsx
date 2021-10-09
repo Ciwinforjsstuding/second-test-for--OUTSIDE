@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { useTypeSelector } from '../../hooks/useTypeSelector';
-import { IBrandReducer } from '../../types/bredns';
-import CardBrand from '../CardBrand';
+import { IBrandReducer } from '../../types/brand';
+import CardBrand from '../Cards/CardBrand';
 
 import './list-card-brands.css';
 

@@ -1,6 +1,10 @@
 import React, { FC, useState } from 'react';
 import { useAction } from '../../hooks/useAction';
-import { KeyRootTree } from '../../types/bredns';
+import {
+  isValueInputEmpty,
+  isValueinputValidForTitleTree,
+} from '../../store/util';
+import { KeyRootTree } from '../../types/brand';
 import ErrorAlert from '../ErrorAlert';
 
 import './creaete-brand.css';
@@ -28,7 +32,7 @@ const CreateBrand: FC<ICreateBrand> = ({ titleTree }) => {
   };
   const btnHadnler = (e: React.MouseEvent) => {
     e.preventDefault();
-    if (valueInput === '') {
+    if (isValueInputEmpty(valueInput)) {
       setErrorList(prev => {
         prev.push('Input не может быть пустым');
         return prev;
@@ -38,10 +42,10 @@ const CreateBrand: FC<ICreateBrand> = ({ titleTree }) => {
         setValidationError(false);
         setErrorList([]);
       }, 2000);
-
       return;
     }
-    if (valueInput[0].toLocaleLowerCase() !== titleTree) {
+
+    if (!isValueinputValidForTitleTree(valueInput, titleTree)) {
       setErrorList(prev => {
         prev.push(
           'Название бренда должно начинаться с той же буквы что у карточки'

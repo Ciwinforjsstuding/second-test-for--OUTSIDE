@@ -4,7 +4,7 @@ import {
   EnumKeyRootTree,
   IBrand,
   KeyRootTree,
-} from '../../../types/bredns';
+} from '../../../types/brand';
 
 import CardItem from '../CardItem';
 

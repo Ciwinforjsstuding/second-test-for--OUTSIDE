@@ -3,7 +3,7 @@ import './App.css';
 import ListCardBrands from './components/ListCardBrands';
 import { useAction } from './hooks/useAction';
 import { useTypeSelector } from './hooks/useTypeSelector';
-import { IBrandReducer } from './types/bredns';
+import { IBrandReducer } from './types/brand';
 
 function App() {
   const { fetchBrandsAction } = useAction();

@@ -1,4 +1,4 @@
-import { IRootTrees } from '../types/bredns';
+import { IRootTrees } from '../types/brand';
 
 export const initiallRootTree: IRootTrees = {
   0: [],

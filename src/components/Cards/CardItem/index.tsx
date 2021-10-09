@@ -1,8 +1,10 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 
 import cross from '../../../icons/cross.svg';
+import pencil from '../../../icons/pencil-solid.svg';
 import { createFirtsLetterInTitle } from '../../../store/util';
-import { IBrand, KeyRootTree } from '../../../types/bredns';
+import { IBrand, KeyRootTree } from '../../../types/brand';
+import EdditForm from '../../EdditForm';
 
 import './card-item.css';
 
@@ -13,22 +15,43 @@ interface ICardItem {
 }
 const CardItem: FC<ICardItem> = ({ brand, index, fnDeletItem }) => {
   const titleTree = createFirtsLetterInTitle(brand);
+  const [isEddit, setIsEddit] = useState<boolean>(false);
+  const clickHandler = () => {
+    setIsEddit(prev => !prev);
+  };
+  const clickHandlerDelet = () => fnDeletItem(brand._id, titleTree);
   return (
-    <div className="card-item flex items-center justify-between">
-      <div className="card-item-text flex items-center">
-        <span className="card-item-text__number">{index + 1}</span>
-        <span className="card-item-text__title">{brand.title}</span>
-        <span className="card-item-text__main">
-          main: {String(brand.main)}
-        </span>
+    <>
+      <div className="card-item flex items-center justify-between">
+        <div className="card-item-text flex items-center">
+          <span className="card-item-text__number">{index + 1}</span>
+          <span className="card-item-text__title">{brand.title}</span>
+          <button className="card-item-text__eddit-btn flex items-center">
+            <img
+              onClick={clickHandler}
+              className="pencil"
+              src={pencil}
+              alt="редактирование бренда"
+            />
+          </button>
+          <span className="card-item-text__main">
+            main: {String(brand.main)}
+          </span>
+        </div>
+        <button
+          onClick={clickHandlerDelet}
+          className="card-item__btn-remove">
+          <img className="cross" src={cross} alt="удалить бренд" />
+        </button>
       </div>
-
-      <button
-        onClick={() => fnDeletItem(brand._id, titleTree)}
-        className="card-item__btn-remove">
-        <img className="cross" src={cross} alt="удалить бренд" />
-      </button>
-    </div>
+      {isEddit && (
+        <EdditForm
+          fnClose={clickHandler}
+          brand={brand}
+          titleTree={titleTree}
+        />
+      )}
+    </>
   );
 };
 

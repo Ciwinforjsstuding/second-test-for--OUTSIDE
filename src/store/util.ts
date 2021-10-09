@@ -1,8 +1,4 @@
-import {
-  IBrand,
-  IRootTrees,
-  KeyBrandsForSort,
-} from '../types/bredns';
+import { IBrand, IRootTrees, KeyBrandsForSort } from '../types/brand';
 
 export const createFirtsLetterInTitle = (brand: IBrand): string =>
   brand.title[0].toLowerCase();
@@ -47,10 +43,29 @@ export const addBrandToRootTree = (
 ): IRootTrees => {
   const copyRootTrees = { ...rootTrees };
   const firstLetterInTitle = createFirtsLetterInTitle(newBrand);
-
   copyRootTrees[firstLetterInTitle].push(newBrand);
-  return rootTrees;
+  return copyRootTrees;
 };
+
+export const updateBrandToRootTree = (
+  rootTrees: IRootTrees,
+  updatedBrand: IBrand,
+  titleTree: string
+): IRootTrees => {
+  const newRootTree = rootTrees[titleTree].map(brand =>
+    brand._id === updatedBrand._id ? updatedBrand : brand
+  );
+  const newRootTrees = { ...rootTrees, [titleTree]: newRootTree };
+  return newRootTrees;
+};
+
+// function changeElem(arr, changes) {
+//   // const newArr = [...arr]
+//   const newArr = arr.map(elem =>
+//     elem.id === changes.id ? changes : elem
+//   );
+//   return newArr;
+// }
 
 export const sortRootTree = (
   rootTree: IBrand[],
@@ -72,3 +87,11 @@ export const sortRootTree = (
   }
   return copyRootTree;
 };
+
+export const isValueInputEmpty = (value: string): boolean =>
+  value.length === 0;
+
+export const isValueinputValidForTitleTree = (
+  value: string,
+  titleTree: string
+): boolean => value[0].toLocaleLowerCase() === titleTree;
