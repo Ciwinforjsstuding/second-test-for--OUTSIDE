@@ -22,11 +22,9 @@ function App() {
   }, []);
 
   if (loadingRootTree) {
-    //TODO: сделай прелоад
     return <h1>Пока идёт загрузка</h1>;
   }
   if (error) {
-    //TODO: сделай компонент с выводом ошибки
     return <h1>{error}</h1>;
   }
   return (

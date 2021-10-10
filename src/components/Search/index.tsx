@@ -16,18 +16,20 @@ const Search: FC = () => {
   const inputHadnler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValueInput(e.target.value);
   };
-  const clickHandlerSearch = () => {
+  const clickHandlerSearch = (e: React.MouseEvent) => {
+    e.preventDefault();
     if (isValueInputEmpty(valueInput)) {
       sendValidateError('Напишите текст для поиска');
     }
     searchBrnadByStringAction(valueInput);
   };
-  const clickHandlerReset = () => {
+  const clickHandlerReset = (e: React.MouseEvent) => {
+    e.preventDefault();
     resetSearchAction();
     setValueInput('');
   };
   return (
-    <div className="search flex items-center justify-between">
+    <form className="search flex items-center justify-between">
       <input
         className="search__input"
         value={valueInput}
@@ -45,7 +47,7 @@ const Search: FC = () => {
         className="search__btn_reset">
         Сбросить
       </button>
-    </div>
+    </form>
   );
 };
 export default Search;

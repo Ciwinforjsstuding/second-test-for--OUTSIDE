@@ -50,7 +50,9 @@ const EdditForm: FC<IEdditForm> = ({ brand, titleTree, fnClose }) => {
         <div className="card-eddit-header flex items-center justify-between">
           <span className="card-eddit-header__brend">
             Редактирование бренда:
-            <span className="bold">{brand.title}</span>
+            <abbr title={brand.title} className="bold">
+              {brand.title}
+            </abbr>
           </span>
           <span className="card-eddit-header__title-tree">
             в карточке: <span className="bold">{titleTree}</span>

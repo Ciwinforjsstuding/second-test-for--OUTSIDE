@@ -14,8 +14,8 @@ interface ISortBtn {
 
 const SortBtn: FC<ISortBtn> = ({ titleTree, startSortUp = true }) => {
   const [sortUp, setsortUp] = useState<boolean>(startSortUp);
-  const sortText = sortUp ? 'A-Z' : 'Z-A';
-  const sortImg = sortUp ? arrowUp : arrowDown;
+  const sortText: string = sortUp ? 'A-Z' : 'Z-A';
+  const sortImg: string = sortUp ? arrowUp : arrowDown;
   const { sortRootTreeAction } = useAction();
   const toggleSortHandler = () => {
     setsortUp(prev => !prev);
