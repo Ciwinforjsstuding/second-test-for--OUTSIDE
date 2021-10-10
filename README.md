@@ -4,26 +4,33 @@
 
 ## В папке hooks есть 2 хука:
 
-useTypeSelector -> типизации useSelecotr.
-useaction -> для использования action без dispatch.
+# useTypeSelector -> типизации useSelecotr.
+
+# useaction -> для использования action без dispatch.
 
 ## В папке style лежат 2 файла:
 
-atomic -> селекторы для atomic css
-colors -> css переменные
+# atomic -> селекторы для atomic css
+
+# colors -> css переменные
 
 ## В папке types лежат 2 файла:
 
-brand.ts -> описаны типы для наших брендов и всё что с ними связанно
-errorValid.ts -> описаны типы для наших ошибок в валидировании
+# brand.ts -> описаны типы для наших брендов и всё что с ними связанно
+
+# errorValid.ts -> описаны типы для наших ошибок в валидировании
 
 ## В папке store:
 
-constants.ts -> 2 константы необходимые для инициализации 2 полей в reducer
-index.ts -> просто собираем наш stor
-util.ts -> разнообразные функции которые созадавал либо вынести повтоярющиеся действия либо вынести сложную логику из reducer
-папка reducer -> два reducera
-папка actions -> два файла с action-creators разделённые по смыслу
+# constants.ts -> 2 константы необходимые для инициализации 2 полей в reducer
+
+# index.ts -> просто собираем наш stor
+
+# util.ts -> разнообразные функции которые созадавал либо вынести повтоярющиеся действия либо вынести сложную логику из reducer
+
+# папка reducer -> два reducera
+
+# папка actions -> два файла с action-creators разделённые по смыслу
 
 ## В папке styleComponents:
 
