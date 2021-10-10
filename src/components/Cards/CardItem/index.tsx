@@ -3,6 +3,7 @@ import React, { FC, useState } from 'react';
 import cross from '../../../icons/cross.svg';
 import pencil from '../../../icons/pencil-solid.svg';
 import { createFirtsLetterInTitle } from '../../../store/util';
+import Button from '../../../StyleComponents/Button';
 import { IBrand, KeyRootTree } from '../../../types/brand';
 import EdditForm from '../../EdditForm';
 
@@ -28,23 +29,24 @@ const CardItem: FC<ICardItem> = ({ brand, index, fnDeletItem }) => {
           <abbr title={brand.title} className="card-item-text__title">
             {brand.title}
           </abbr>
-          <button className="card-item-text__eddit-btn flex items-center">
+          <Button
+            clickHandler={clickHandler}
+            customCssBtn="card-item-text__eddit-btn flex items-center">
             <img
-              onClick={clickHandler}
               className="pencil"
               src={pencil}
               alt="редактирование бренда"
             />
-          </button>
+          </Button>
           <span className="card-item-text__main">
             main: {String(brand.main)}
           </span>
         </div>
-        <button
-          onClick={clickHandlerDelet}
-          className="card-item__btn-remove">
+        <Button
+          clickHandler={clickHandlerDelet}
+          customCssBtn="card-item__btn-remove">
           <img className="cross" src={cross} alt="удалить бренд" />
-        </button>
+        </Button>
       </div>
       {isEddit && (
         <EdditForm

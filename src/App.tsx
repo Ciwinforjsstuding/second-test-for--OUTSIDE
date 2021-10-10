@@ -10,12 +10,15 @@ import { IBrandReducer } from './types/brand';
 
 function App() {
   const { fetchBrandsAction } = useAction();
-  const { error, loadingRootTree, isFoundSomething }: IBrandReducer =
-    useTypeSelector(state => state.brands);
+  const {
+    error,
+    loadingRootTree,
+    showEmptyResultSearch,
+  }: IBrandReducer = useTypeSelector(state => state.brands);
   const { haveValidError, errorList } = useTypeSelector(
     state => state.errorValidate
   );
-  const isFoundFalse = isFoundSomething === false;
+  // const isFoundFalse = isFoundSomething === false;
   useEffect(() => {
     fetchBrandsAction();
     // eslint-disable-next-line
@@ -35,7 +38,7 @@ function App() {
       <div className="container flex flex-column items-center">
         <ListCardBrands />
         {haveValidError && <ErrorAlert errorList={errorList} />}
-        {isFoundFalse && <EmptyResultSearch />}
+        {showEmptyResultSearch && <EmptyResultSearch />}
       </div>
     </div>
   );

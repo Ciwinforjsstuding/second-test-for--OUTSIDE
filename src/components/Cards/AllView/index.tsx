@@ -1,6 +1,7 @@
 import React, { FC } from 'react';
 import { useAction } from '../../../hooks/useAction';
 import { IBrand } from '../../../types/brand';
+
 import CardItem from '../CardItem';
 
 import './all-view.css';

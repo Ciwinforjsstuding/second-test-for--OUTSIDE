@@ -25,6 +25,7 @@ const initiallState = {
   rootTrees: initiallRootTree,
   searchResult: unlinkObject(initiallSearchResult),
   isFoundSomething: null,
+  showEmptyResultSearch: null,
 };
 
 export const brandReducer = (
@@ -185,7 +186,13 @@ export const brandReducer = (
   if (action.type === BrandsActionType.SHOW_EMPTY_RESYLT) {
     return {
       ...state,
-      isFoundSomething: null,
+      showEmptyResultSearch: true,
+    };
+  }
+  if (action.type === BrandsActionType.CLOSE_EMPTY_RESYLT) {
+    return {
+      ...state,
+      showEmptyResultSearch: false,
     };
   }
   if (action.type === BrandsActionType.RESET_SEARCH) {

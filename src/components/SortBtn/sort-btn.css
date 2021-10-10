@@ -4,15 +4,8 @@
 
 .sort-btn {
   border: 0px;
-  cursor: pointer;
-  background: var(--white);
   margin: 0 1rem 0 0;
   padding: 5px 10px;
-  border-radius: 0.5rem;
-}
-
-.sort-btn:active {
-  background: var(--bg-btn-active);
 }
 
 .sort-btn__img {

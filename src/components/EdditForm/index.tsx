@@ -5,13 +5,15 @@ import { IBrand, KeyRootTree } from '../../types/brand';
 
 import './eddit-form.css';
 
+import trash from '../../icons/trash.svg';
+import save from '../../icons/save.svg';
 import cross from '../../icons/cross.svg';
-import SaveBtn from './SaveBtn';
-import DeletBtn from './DeletBtn';
+
 import {
   isValueInputEmpty,
   isValueInputValidForTitleTree,
 } from '../../store/util';
+import Button from '../../StyleComponents/Button';
 
 interface IEdditForm {
   brand: IBrand;
@@ -57,15 +59,15 @@ const EdditForm: FC<IEdditForm> = ({ brand, titleTree, fnClose }) => {
           <span className="card-eddit-header__title-tree">
             в карточке: <span className="bold">{titleTree}</span>
           </span>
-          <button
-            onClick={fnClose}
-            className="card-eddit-header__btn">
+          <Button
+            clickHandler={fnClose}
+            customCssBtn="card-eddit-header__btn">
             <img
               src={cross}
               className="cross-eddit-form"
               alt="закрыть форму редактирования"
             />
-          </button>
+          </Button>
         </div>
         <div className="card-eddit-body flex flex-column items-center">
           <label className="card-eddit-body-wrpa-input flex items-center justify-between">
@@ -80,14 +82,34 @@ const EdditForm: FC<IEdditForm> = ({ brand, titleTree, fnClose }) => {
             />
           </label>
           {isValueInputEmpty(valueInput) ? (
-            <DeletBtn clickHandler={clickHadndlerDelet} />
+            <Button
+              alt
+              customCssBtn="card-eddit-body__btn flex justify-around items-center"
+              clickHandler={clickHadndlerDelet}>
+              Удалить
+              <img
+                className="card-eddit-body__btn_icon"
+                src={trash}
+                alt="удалить бренд"
+              />
+            </Button>
           ) : (
-            <SaveBtn clickHandler={clickHandlerUpdate} />
+            <Button
+              alt
+              clickHandler={clickHandlerUpdate}
+              customCssBtn="card-eddit-body__btn flex justify-around items-center">
+              Сохранить
+              <img
+                className="card-eddit-body__btn_icon"
+                src={save}
+                alt="сохранить изменения"
+              />
+            </Button>
           )}
         </div>
       </form>
     </PopUp>
   );
 };
-
+//<SaveBtn clickHandler={clickHandlerUpdate}
 export default EdditForm;

@@ -4,6 +4,7 @@ import {
   isValueInputEmpty,
   isValueInputValidForTitleTree,
 } from '../../store/util';
+import Button from '../../StyleComponents/Button';
 import { KeyRootTree } from '../../types/brand';
 
 import './creaete-brand.css';
@@ -57,9 +58,11 @@ const CreateBrand: FC<ICreateBrand> = ({ titleTree }) => {
           checked={isMain}
         />
       </label> */}
-      <button className="create-brand__btn" onClick={btnHadnler}>
+      <Button
+        customCssBtn="create-brand__btn"
+        clickHandler={btnHadnler}>
         Создать
-      </button>
+      </Button>
     </form>
   );
 };

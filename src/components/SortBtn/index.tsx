@@ -6,6 +6,7 @@ import arrowUp from '../../icons/arrow-up-solid.svg';
 import arrowDown from '../../icons/arrow-down-solid.svg';
 
 import './sort-btn.css';
+import Button from '../../StyleComponents/Button';
 
 interface ISortBtn {
   titleTree: KeyRootTree | string;
@@ -23,13 +24,15 @@ const SortBtn: FC<ISortBtn> = ({ titleTree, startSortUp = true }) => {
   };
   return (
     <label className="sort-wrap flex items-center">
-      <button onClick={toggleSortHandler} className="sort-btn">
+      <Button
+        customCssBtn="sort-btn"
+        clickHandler={toggleSortHandler}>
         <img
           className="sort-btn__img"
           src={sortImg}
           alt="кнопка сортировки"
         />
-      </button>
+      </Button>
       <span className="sort__text">{sortText}</span>
     </label>
   );

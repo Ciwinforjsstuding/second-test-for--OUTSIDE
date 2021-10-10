@@ -8,6 +8,7 @@ import EmptyCard from '../EmptyCard';
 
 import './card-brands.css';
 import CreateBrand from '../../CreateBrand';
+import Button from '../../../StyleComponents/Button';
 
 interface IRootTree {
   rootTree: IBrand[];
@@ -39,11 +40,11 @@ const CardBrand: FC<IRootTree> = ({
           <span className="card-brands-state__text">
             {stateCardText}
           </span>
-          <button
-            onClick={toggleHadnler}
-            className="card-brands-state__btn">
+          <Button
+            customCssBtn="card-brands-state__btn"
+            clickHandler={toggleHadnler}>
             Переключить
-          </button>
+          </Button>
         </div>
       </div>
       {isOpen ? (

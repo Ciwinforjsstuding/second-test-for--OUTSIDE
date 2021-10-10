@@ -15,6 +15,7 @@ export enum BrandsActionType {
   SORT_ROOT_TREE = 'SORT_ROOT_TREE',
   SEARCH_BRAND = 'SEARCH_BRAND',
   SHOW_EMPTY_RESYLT = 'SHOW_EMPTY_RESYLT',
+  CLOSE_EMPTY_RESYLT = 'CLOSE_EMPTY_RESYLT',
   RESET_SEARCH = 'RESET_SEARCH',
 }
 
@@ -34,6 +35,7 @@ export interface IBrandReducer {
   rootTrees: IRootTrees;
   searchResult: IRootTrees;
   isFoundSomething: null | boolean;
+  showEmptyResultSearch: null | boolean;
 }
 
 //описываем типы для каждого action
@@ -122,10 +124,15 @@ interface ISearchBrandAction {
   payload: string;
 }
 
-interface IShowEmptyResult {
+interface IShowEmptyResultAction {
   type: BrandsActionType.SHOW_EMPTY_RESYLT;
 }
-interface IResetSearch {
+
+interface ICloseEmptyResultAction {
+  type: BrandsActionType.CLOSE_EMPTY_RESYLT;
+}
+
+interface IResetSearchAction {
   type: BrandsActionType.RESET_SEARCH;
 }
 
@@ -149,8 +156,9 @@ export type BrandsAction =
   | IUpdateBrandErrorAction
   | IUpdateBrandSuccessAction
   | ISearchBrandAction
-  | IShowEmptyResult
-  | IResetSearch;
+  | IShowEmptyResultAction
+  | IResetSearchAction
+  | ICloseEmptyResultAction;
 
 export enum EnumKeyRootTree {
   title = 'title',

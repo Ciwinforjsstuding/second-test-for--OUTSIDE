@@ -131,10 +131,13 @@ export const resetSearchAction = () => ({
 
 export const showEmptyResultAction = () => {
   return async (dispatch: Dispatch<BrandsAction>) => {
+    dispatch({
+      type: BrandsActionType.SHOW_EMPTY_RESYLT,
+    });
     setTimeout(
       () =>
         dispatch({
-          type: BrandsActionType.SHOW_EMPTY_RESYLT,
+          type: BrandsActionType.CLOSE_EMPTY_RESYLT,
         }),
       1000
     );

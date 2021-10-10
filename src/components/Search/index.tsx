@@ -1,8 +1,10 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import { useAction } from '../../hooks/useAction';
+import { useTypeSelector } from '../../hooks/useTypeSelector';
 
 import search from '../../icons/search-icon.svg';
 import { isValueInputEmpty } from '../../store/util';
+import Button from '../../StyleComponents/Button';
 
 import './shearch.css';
 
@@ -13,11 +15,20 @@ const Search: FC = () => {
     sendValidateError,
     resetSearchAction,
   } = useAction();
+  const { showEmptyResultSearch } = useTypeSelector(
+    state => state.brands
+  );
+  useEffect(() => {
+    if (showEmptyResultSearch === true) {
+      setValueInput('');
+    }
+  }, [showEmptyResultSearch]);
   const inputHadnler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValueInput(e.target.value);
   };
   const clickHandlerSearch = (e: React.MouseEvent) => {
     e.preventDefault();
+
     if (isValueInputEmpty(valueInput)) {
       sendValidateError('Напишите текст для поиска');
     }
@@ -37,16 +48,18 @@ const Search: FC = () => {
         type="text"
         placeholder="Введите название бренда"
       />
-      <button
-        onClick={clickHandlerSearch}
-        className="search__btn_search">
+      <Button
+        alt
+        clickHandler={clickHandlerSearch}
+        customCssBtn="search__btn_search">
         <img src={search} className="search-icon" alt="поиск" />
-      </button>
-      <button
-        onClick={clickHandlerReset}
-        className="search__btn_reset">
+      </Button>
+      <Button
+        alt
+        customCssBtn="search__btn_reset"
+        clickHandler={clickHandlerReset}>
         Сбросить
-      </button>
+      </Button>
     </form>
   );
 };

@@ -19,14 +19,7 @@
 }
 
 .error-alert-card-header__btn {
-  cursor: pointer;
-  background: var(--bg-btn);
-  border: 0px;
   padding: 5px 10px;
-  border-radius: 0.5rem;
-}
-.error-alert-card-header__btn:active {
-  background: var(--bg-btn-active);
 }
 
 .croos-in-card {
