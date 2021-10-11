@@ -85,12 +85,10 @@ const EdditForm: FC<IEdditForm> = ({ brand, titleTree, fnClose }) => {
               onChange={inputhandler}
             />
           </label>
-          <label className="card-eddit-body-wrap-checkbox flex justify-start items-center">
-            <span className="card-eddit-body-checkbox__text">
-              Main:
-            </span>
+          <label className="card-eddit-body-wrap-check flex justify-start items-center">
+            <span className="card-eddit-body-check__text">Main:</span>
             <input
-              className="card-eddit-body-checkbox__checkbox"
+              className="card-eddit-body-check__checkbox"
               type="checkbox"
               onChange={checkBoxHandler}
               checked={check}

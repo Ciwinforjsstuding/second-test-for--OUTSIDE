@@ -24,18 +24,18 @@
   height: 20px;
 }
 
-.card-eddit-body-wrap-checkbox {
+.card-eddit-body-wrap-check {
   padding: 10px 15px 15px 15px;
   margin: 0 0 10px 0;
   width: 95%;
 }
 
-.card-eddit-body-checkbox__text {
+.card-eddit-body-check__text {
   cursor: pointer;
   margin: 0 15px 0 0;
 }
 
-.card-eddit-body-checkbox__checkbox {
+.card-eddit-body-check__checkbox {
   cursor: pointer;
 }
 
