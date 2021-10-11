@@ -23,6 +23,7 @@ interface IEdditForm {
 
 const EdditForm: FC<IEdditForm> = ({ brand, titleTree, fnClose }) => {
   const [valueInput, setValueInput] = useState<string>(brand.title);
+  const [check, setCheck] = useState<boolean>(brand.main);
   const { sendValidateError } = useAction();
   const inputhandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValueInput(e.target.value);
@@ -36,8 +37,11 @@ const EdditForm: FC<IEdditForm> = ({ brand, titleTree, fnClose }) => {
       );
       return;
     }
-    updateBrand(brand._id, valueInput, titleTree);
+    updateBrand(brand._id, valueInput, titleTree, check);
     fnClose();
+  };
+  const checkBoxHandler = () => {
+    setCheck(prev => !prev);
   };
   const clickHadndlerDelet = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -79,6 +83,17 @@ const EdditForm: FC<IEdditForm> = ({ brand, titleTree, fnClose }) => {
               placeholder="Название бренда"
               value={valueInput}
               onChange={inputhandler}
+            />
+          </label>
+          <label className="card-eddit-body-wrap-checkbox flex justify-start items-center">
+            <span className="card-eddit-body-checkbox__text">
+              Main:
+            </span>
+            <input
+              className="card-eddit-body-checkbox__checkbox"
+              type="checkbox"
+              onChange={checkBoxHandler}
+              checked={check}
             />
           </label>
           {isValueInputEmpty(valueInput) ? (

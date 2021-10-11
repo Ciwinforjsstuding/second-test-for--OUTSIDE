@@ -14,13 +14,13 @@ interface ICreateBrand {
 }
 //код в коментариях отвечает за переключение main
 const CreateBrand: FC<ICreateBrand> = ({ titleTree }) => {
-  // const [isMain, setIsMain] = useState<boolean>(false);
+  const [isMain, setIsMain] = useState<boolean>(false);
   const [valueInput, setValueInput] = useState<string>('');
   useState<boolean>(false);
   const { createBrand, sendValidateError } = useAction();
-  // const checkBoxhandler = () => {
-  //   setIsMain(prev => !prev);
-  // };
+  const checkBoxhandler = () => {
+    setIsMain(prev => !prev);
+  };
   const inputHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValueInput(e.target.value);
   };
@@ -37,8 +37,8 @@ const CreateBrand: FC<ICreateBrand> = ({ titleTree }) => {
       );
       return;
     }
-    createBrand(valueInput);
-    // setIsMain(false);
+    createBrand(valueInput, isMain);
+    setIsMain(false);
     setValueInput('');
   };
   return (
@@ -49,7 +49,7 @@ const CreateBrand: FC<ICreateBrand> = ({ titleTree }) => {
         onChange={inputHandler}
         placeholder="Введите название бренда"
       />
-      {/* <label className="create-brand-wrap-checkbox">
+      <label className="create-brand-wrap-checkbox">
         <span className="create-brand-checkbox__text">Main:</span>
         <input
           className="create-brand__checkbox"
@@ -57,7 +57,7 @@ const CreateBrand: FC<ICreateBrand> = ({ titleTree }) => {
           onChange={checkBoxhandler}
           checked={isMain}
         />
-      </label> */}
+      </label>
       <Button
         customCssBtn="create-brand__btn"
         clickHandler={btnHadnler}>

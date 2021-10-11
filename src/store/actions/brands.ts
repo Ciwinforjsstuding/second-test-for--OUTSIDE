@@ -33,14 +33,14 @@ export const fetchBrandsAction = () => {
   };
 };
 
-export const createBrand = (title: string, main?: boolean) => {
+export const createBrand = (title: string, main: boolean) => {
   return async (dispatch: Dispatch<BrandsAction>) => {
     try {
       dispatch({ type: BrandsActionType.CRETE_BRAND });
       const respons = await axios.post(getAllBrands(), {
         _id: '',
         title,
-        main: true,
+        main,
         __v: 0,
       });
       dispatch({
@@ -83,7 +83,8 @@ export const deletItemCardAction = (
 export const updateBrand = (
   _id: string,
   title: string,
-  titleTree: string
+  titleTree: string,
+  main: boolean
 ) => {
   return async (dispatch: Dispatch<BrandsAction>) => {
     try {
@@ -91,7 +92,7 @@ export const updateBrand = (
       const respons = await axios.put(getUrlBrand(_id), {
         _id: '',
         title,
-        main: true,
+        main,
         __v: 0,
       });
       dispatch({
