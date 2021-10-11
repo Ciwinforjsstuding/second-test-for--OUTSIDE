@@ -3,6 +3,7 @@ import './App.css';
 import EmptyResultSearch from './components/EmptyResultSearch';
 import ErrorAlert from './components/ErrorAlert';
 import ListCardBrands from './components/ListCardBrands';
+import Lodaer from './components/Loader';
 import Search from './components/Search';
 import { useAction } from './hooks/useAction';
 import { useTypeSelector } from './hooks/useTypeSelector';
@@ -18,14 +19,12 @@ function App() {
   const { haveValidError, errorList } = useTypeSelector(
     state => state.errorValidate
   );
-  // const isFoundFalse = isFoundSomething === false;
   useEffect(() => {
     fetchBrandsAction();
     // eslint-disable-next-line
   }, []);
-
   if (loadingRootTree) {
-    return <h1>Пока идёт загрузка</h1>;
+    return <Lodaer />;
   }
   if (error) {
     return <h1>{error}</h1>;
