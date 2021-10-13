@@ -20,7 +20,7 @@ const AllView: FC<IAllView> = ({ rootTree }) => {
       } flex flex-column items-center`}>
       {rootTree.map((brand, i) => (
         <CardItem
-          key={i}
+          key={brand._id}
           index={i}
           brand={brand}
           fnDeletItem={deletItemCardAction}

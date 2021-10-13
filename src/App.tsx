@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { FC, useEffect } from 'react';
 import './App.css';
 import EmptyResultSearch from './components/EmptyResultSearch';
 import ErrorAlert from './components/ErrorAlert';
@@ -9,7 +9,7 @@ import { useAction } from './hooks/useAction';
 import { useTypeSelector } from './hooks/useTypeSelector';
 import { IBrandReducer } from './types/brand';
 
-function App() {
+const App: FC = () => {
   const { fetchBrandsAction } = useAction();
   const {
     error,
@@ -41,6 +41,6 @@ function App() {
       </div>
     </div>
   );
-}
+};
 
 export default App;

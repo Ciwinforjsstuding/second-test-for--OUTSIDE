@@ -34,7 +34,7 @@ const ShortView: FC<IShortView> = ({ rootTree, titleTree }) => {
     <div className="card-short flex flex-column items-center">
       {sliceRootTree.map((brand, i) => (
         <CardItem
-          key={i}
+          key={brand._id}
           index={i}
           brand={brand}
           fnDeletItem={deletItemCardAction}

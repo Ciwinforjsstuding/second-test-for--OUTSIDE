@@ -21,7 +21,7 @@ const ListCardBrands: FC = () => {
     <div className="list-card-brands flex justify-around items-start flex-wrap">
       {keyTrees.map((keyTree, i) => (
         <CardBrand
-          key={i}
+          key={keyTree}
           titleTree={keyTree}
           rootTree={showDate[keyTree]}
         />
