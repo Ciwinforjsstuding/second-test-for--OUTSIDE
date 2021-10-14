@@ -33,14 +33,14 @@ export const fetchBrandsAction = () => {
   };
 };
 
-export const createBrand = (title: string, main: boolean) => {
+export const createBrand = (title: string) => {
   return async (dispatch: Dispatch<BrandsAction>) => {
     try {
       dispatch({ type: BrandsActionType.CRETE_BRAND });
       const respons = await axios.post(getAllBrands(), {
         _id: '',
         title,
-        main,
+        main: true,
         __v: 0,
       });
       dispatch({
